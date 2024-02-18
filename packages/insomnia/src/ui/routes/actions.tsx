@@ -25,7 +25,6 @@ import { guard } from '../../utils/guard';
 
 // Project
 export const createNewProjectAction: ActionFunction = async ({ request, params }) => {
-  guard(DEFAULT_ORGANIZATION_ID, 'Organization ID is required');
   const formData = await request.formData();
   const name = formData.get('name');
   guard(typeof name === 'string', 'Name is required');
@@ -62,7 +61,6 @@ export const renameProjectAction: ActionFunction = async ({
 
 export const deleteProjectAction: ActionFunction = async ({ params }) => {
   const { projectId } = params;
-  guard(DEFAULT_ORGANIZATION_ID, 'Organization ID is required');
   guard(projectId, 'Project ID is required');
   const project = await models.project.getById(projectId);
   guard(project, 'Project not found');
@@ -79,7 +77,6 @@ export const createNewWorkspaceAction: ActionFunction = async ({
   request,
 }) => {
   const { projectId } = params;
-  guard(DEFAULT_ORGANIZATION_ID, 'Organization ID is required');
   guard(projectId, 'Project ID is required');
 
   const project = await models.project.getById(projectId);
@@ -167,7 +164,6 @@ export const deleteWorkspaceAction: ActionFunction = async ({
 };
 
 export const duplicateWorkspaceAction: ActionFunction = async ({ request, params }) => {
-  guard(DEFAULT_ORGANIZATION_ID, 'Organization Id is required');
   const formData = await request.formData();
   const projectId = formData.get('projectId');
   guard(typeof projectId === 'string', 'Project ID is required');

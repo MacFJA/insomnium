@@ -183,7 +183,6 @@ const UnitTestItemView = ({
 
 export const indexLoader: LoaderFunction = async ({ params }) => {
   const { projectId, workspaceId } = params;
-  guard(DEFAULT_ORGANIZATION_ID, 'organizationId is required');
   guard(projectId, 'projectId is required');
   guard(workspaceId, 'workspaceId is required');
 

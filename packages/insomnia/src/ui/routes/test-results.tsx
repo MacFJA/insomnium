@@ -15,7 +15,6 @@ interface TestResultsData {
 export const indexLoader: LoaderFunction = async ({ params }) => {
   const { projectId, workspaceId, testSuiteId } = params;
   guard(projectId, 'Project ID is required');
-  guard(DEFAULT_ORGANIZATION_ID, 'Organization ID is required');
   guard(workspaceId, 'Workspace ID is required');
   guard(testSuiteId, 'Test suite ID is required');
 

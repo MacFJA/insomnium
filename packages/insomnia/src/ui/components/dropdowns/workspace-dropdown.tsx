@@ -28,7 +28,6 @@ console.log("[configGenerators] ", configGenerators);
 
 export const WorkspaceDropdown: FC = () => {
   const { projectId, workspaceId } = useParams<{ projectId: string; workspaceId: string }>();
-  guard(DEFAULT_ORGANIZATION_ID, 'Expected organizationId');
   const {
     activeWorkspace,
     activeWorkspaceMeta,

@@ -85,8 +85,6 @@ export interface WorkspaceWithMetadata {
 }
 
 export const indexLoader: LoaderFunction = async ({ params }) => {
-  guard(DEFAULT_ORGANIZATION_ID, 'Organization ID is required');
-
   const prevOrganizationLocation = localStorage.getItem(
     `locationHistoryEntry:${DEFAULT_ORGANIZATION_ID}`
   );
@@ -140,7 +138,6 @@ export const loader: LoaderFunction = async ({
 }): Promise<ProjectLoaderData> => {
   const search = new URL(request.url).searchParams;
   const { projectId } = params;
-  guard(DEFAULT_ORGANIZATION_ID, 'Organization ID is required');
   guard(projectId, 'projectId parameter is required');
   const sortOrder = search.get('sortOrder') || 'modified-desc';
   const filter = search.get('filter') || '';
