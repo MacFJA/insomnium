@@ -58,7 +58,7 @@ export const loader: LoaderFunction = async ({ params }): Promise<RequestLoaderD
   guard(workspaceId, 'Workspace ID is required');
   const activeRequest = await requestOperations.getById(requestId);
   if (!activeRequest) {
-    throw redirect(`/organization/${DEFAULT_ORGANIZATION_ID}/project/${projectId}/workspace/${workspaceId}/debug`);
+    throw redirect(`/project/${projectId}/workspace/${workspaceId}/debug`);
   }
   const activeWorkspaceMeta = await models.workspaceMeta.getByParentId(workspaceId);
 
@@ -172,7 +172,7 @@ export const createRequestAction: ActionFunction = async ({ request, params }) =
   guard(typeof activeRequestId === 'string', 'Request ID is required');
   models.stats.incrementCreatedRequests();
 
-  return redirect(`/organization/${DEFAULT_ORGANIZATION_ID}/project/${projectId}/workspace/${workspaceId}/debug/request/${activeRequestId}`);
+  return redirect(`/project/${projectId}/workspace/${workspaceId}/debug/request/${activeRequestId}`);
 };
 
 // ARCHY NOTE: ACTUAL REQUEST UPDATE IS HERE after
@@ -207,7 +207,7 @@ export const deleteRequestAction: ActionFunction = async ({ request, params }) =
   guard(workspaceMeta, 'Workspace meta not found');
   if (workspaceMeta.activeRequestId === id) {
     await models.workspaceMeta.updateByParentId(workspaceId, { activeRequestId: null });
-    return redirect(`/organization/${DEFAULT_ORGANIZATION_ID}/project/${projectId}/workspace/${workspaceId}/debug`);
+    return redirect(`/project/${projectId}/workspace/${workspaceId}/debug`);
   }
   return null;
 };
@@ -233,7 +233,7 @@ export const duplicateRequestAction: ActionFunction = async ({ request, params }
   const newRequest = await requestOperations.duplicate(req, { name });
   guard(newRequest, 'Failed to duplicate request');
   models.stats.incrementCreatedRequests();
-  return redirect(`/organization/${DEFAULT_ORGANIZATION_ID}/project/${projectId}/workspace/${workspaceId}/debug/request/${newRequest._id}`);
+  return redirect(`/project/${projectId}/workspace/${workspaceId}/debug/request/${newRequest._id}`);
 };
 
 export const updateRequestMetaAction: ActionFunction = async ({ request, params }) => {

@@ -88,7 +88,7 @@ const TestRoute: FC = () => {
                         },
                         {
                           method: 'post',
-                          action: `/organization/${DEFAULT_ORGANIZATION_ID}/project/${projectId}/workspace/${workspaceId}/test/test-suite/new`,
+                          action: `/project/${projectId}/workspace/${workspaceId}/test/test-suite/new`,
                         }
                       );
                     },
@@ -110,7 +110,7 @@ const TestRoute: FC = () => {
                     onClick={e => {
                       e.preventDefault();
                       navigate(
-                        `/organization/${DEFAULT_ORGANIZATION_ID}/project/${projectId}/workspace/${workspaceId}/test/test-suite/${suite._id}`
+                        `/project/${projectId}/workspace/${workspaceId}/test/test-suite/${suite._id}`
                       );
                     }}
                   >
@@ -137,7 +137,7 @@ const TestRoute: FC = () => {
                             {},
                             {
                               method: 'post',
-                              action: `/organization/${DEFAULT_ORGANIZATION_ID}/project/${projectId}/workspace/${workspaceId}/test/test-suite/${suite._id}/run-all-tests`,
+                              action: `/project/${projectId}/workspace/${workspaceId}/test/test-suite/${suite._id}/run-all-tests`,
                             }
                           );
                         }}
@@ -151,7 +151,7 @@ const TestRoute: FC = () => {
                           deleteUnitTestSuiteFetcher.submit(
                             {},
                             {
-                              action: `/organization/${DEFAULT_ORGANIZATION_ID}/project/${projectId}/workspace/${workspaceId}/test/test-suite/${suite._id}/delete`,
+                              action: `/project/${projectId}/workspace/${workspaceId}/test/test-suite/${suite._id}/delete`,
                               method: 'post',
                             }
                           )

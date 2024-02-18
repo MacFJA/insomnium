@@ -31,7 +31,7 @@ export const RequestGroupSettingsModal = ({ requestGroup, onHide }: ModalProps &
   useEffect(() => {
     const isIdleAndUninitialized = workspacesFetcher.state === 'idle' && !workspacesFetcher.data;
     if (isIdleAndUninitialized) {
-      workspacesFetcher.load(`/organization/${DEFAULT_ORGANIZATION_ID}/project/${projectId}`);
+      workspacesFetcher.load(`/project/${projectId}`);
     }
   }, [projectId, workspacesFetcher]);
   const projectLoaderData = workspacesFetcher?.data as ProjectLoaderData;
@@ -46,7 +46,7 @@ export const RequestGroupSettingsModal = ({ requestGroup, onHide }: ModalProps &
   const duplicateRequestGroup = (r: Partial<RequestGroup>) => {
     requestFetcher.submit(r,
       {
-        action: `/organization/${DEFAULT_ORGANIZATION_ID}/project/${projectId}/workspace/${workspaceId}/debug/request-group/duplicate`,
+        action: `/project/${projectId}/workspace/${workspaceId}/debug/request-group/duplicate`,
         method: 'post',
         encType: 'application/json',
       });
@@ -59,7 +59,7 @@ export const RequestGroupSettingsModal = ({ requestGroup, onHide }: ModalProps &
     guard(state.activeWorkspaceIdToCopyTo, 'Workspace ID is required');
     patchRequestGroup(requestGroup._id, { parentId: state.activeWorkspaceIdToCopyTo });
     modalRef.current?.hide();
-    navigate(`/organization/${DEFAULT_ORGANIZATION_ID}/project/${projectId}/workspace/${state.activeWorkspaceIdToCopyTo}/debug`);
+    navigate(`/project/${projectId}/workspace/${state.activeWorkspaceIdToCopyTo}/debug`);
   };
 
   const handleCopyToWorkspace = async () => {

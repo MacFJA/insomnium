@@ -143,7 +143,7 @@ export const WorkspaceDropdown: FC = () => {
                   fetcher.submit(
                     { name, workspaceId: activeWorkspace._id },
                     {
-                      action: `/organization/${DEFAULT_ORGANIZATION_ID}/project/${activeWorkspace.parentId}/workspace/update`,
+                      action: `/project/${activeWorkspace.parentId}/workspace/update`,
                       method: 'post',
                       encType: 'application/json',
                     }

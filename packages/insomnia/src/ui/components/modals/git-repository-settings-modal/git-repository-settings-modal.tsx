@@ -60,7 +60,7 @@ export const GitRepositorySettingsModal = (props: ModalProps & {
         ...credentials,
       },
       {
-        action: `/organization/${DEFAULT_ORGANIZATION_ID}/project/${projectId}/workspace/${workspaceId}/git/update`,
+        action: `/project/${projectId}/workspace/${workspaceId}/git/update`,
         method: 'post',
       }
     );
@@ -119,7 +119,7 @@ export const GitRepositorySettingsModal = (props: ModalProps & {
               disabled={!gitRepository}
               onClick={() => {
                 deleteGitRepositoryFetcher.submit({}, {
-                  action: `/organization/${DEFAULT_ORGANIZATION_ID}/project/${projectId}/workspace/${workspaceId}/git/reset`,
+                  action: `/project/${projectId}/workspace/${workspaceId}/git/reset`,
                   method: 'post',
                 });
               }}

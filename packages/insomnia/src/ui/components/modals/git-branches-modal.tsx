@@ -50,7 +50,7 @@ export const GitBranchesModal: FC<Props> = (({
 
   useEffect(() => {
     if (branchesFetcher.state === 'idle' && !branchesFetcher.data) {
-      branchesFetcher.load(`/organization/${DEFAULT_ORGANIZATION_ID}/project/${projectId}/workspace/${workspaceId}/git/branches`);
+      branchesFetcher.load(`/project/${projectId}/workspace/${workspaceId}/git/branches`);
     }
   }, [branchesFetcher, projectId, workspaceId]);
 
@@ -70,7 +70,7 @@ export const GitBranchesModal: FC<Props> = (({
         <ModalBody className="pad">
           <newBranchFetcher.Form
             method="post"
-            action={`/organization/${DEFAULT_ORGANIZATION_ID}/project/${projectId}/workspace/${workspaceId}/git/branch/new`}
+            action={`/project/${projectId}/workspace/${workspaceId}/git/branch/new`}
           >
             <div className="form-row">
               <div className="form-control form-control--outlined">
@@ -126,7 +126,7 @@ export const GitBranchesModal: FC<Props> = (({
                               mergeBranchFetcher.submit({
                                 branch,
                               }, {
-                                action: `/organization/${DEFAULT_ORGANIZATION_ID}/project/${projectId}/workspace/${workspaceId}/git/branch/merge`,
+                                action: `/project/${projectId}/workspace/${workspaceId}/git/branch/merge`,
                                 method: 'post',
                               });
                             }}
@@ -140,7 +140,7 @@ export const GitBranchesModal: FC<Props> = (({
                               deleteBranchFetcher.submit({
                                 branch,
                               }, {
-                                action: `/organization/${DEFAULT_ORGANIZATION_ID}/project/${projectId}/workspace/${workspaceId}/git/branch/delete`,
+                                action: `/project/${projectId}/workspace/${workspaceId}/git/branch/delete`,
                                 method: 'post',
                               });
                             }}
@@ -153,7 +153,7 @@ export const GitBranchesModal: FC<Props> = (({
                               checkoutBranchFetcher.submit({
                                 branch,
                               }, {
-                                action: `/organization/${DEFAULT_ORGANIZATION_ID}/project/${projectId}/workspace/${workspaceId}/git/branch/checkout`,
+                                action: `/project/${projectId}/workspace/${workspaceId}/git/branch/checkout`,
                                 method: 'post',
                               });
                             }}
@@ -196,7 +196,7 @@ export const GitBranchesModal: FC<Props> = (({
                             checkoutBranchFetcher.submit({
                               branch,
                             }, {
-                              action: `/organization/${DEFAULT_ORGANIZATION_ID}/project/${projectId}/workspace/${workspaceId}/git/branch/checkout`,
+                              action: `/project/${projectId}/workspace/${workspaceId}/git/branch/checkout`,
                               method: 'post',
                             });
                           }}

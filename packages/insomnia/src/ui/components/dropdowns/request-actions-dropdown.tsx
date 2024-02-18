@@ -73,7 +73,7 @@ export const RequestActionsDropdown = ({
       selectText: true,
       onComplete: (name: string) => requestFetcher.submit({ name },
         {
-          action: `/organization/${DEFAULT_ORGANIZATION_ID}/project/${projectId}/workspace/${workspaceId}/debug/request/${request?._id}/duplicate`,
+          action: `/project/${projectId}/workspace/${workspaceId}/debug/request/${request?._id}/duplicate`,
           method: 'post',
           encType: 'application/json',
         }),
@@ -145,7 +145,7 @@ export const RequestActionsDropdown = ({
     incrementDeletedRequests();
     requestFetcher.submit({ id: request._id },
       {
-        action: `/organization/${DEFAULT_ORGANIZATION_ID}/project/${projectId}/workspace/${workspaceId}/debug/request/delete`,
+        action: `/project/${projectId}/workspace/${workspaceId}/debug/request/delete`,
         method: 'post',
       });
   };

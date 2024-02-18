@@ -131,7 +131,7 @@ export const WorkspaceCardDropdown: FC<Props> = props => {
                   fetcher.submit(
                     { name, workspaceId: workspace._id },
                     {
-                      action: `/organization/${DEFAULT_ORGANIZATION_ID}/project/${workspace.parentId}/workspace/update`,
+                      action: `/project/${workspace.parentId}/workspace/update`,
                       method: 'post',
                       encType: 'application/json',
                     }
@@ -186,7 +186,7 @@ export const WorkspaceCardDropdown: FC<Props> = props => {
                     fetcher.submit(
                       { workspaceId: workspace._id },
                       {
-                        action: `/organization/${DEFAULT_ORGANIZATION_ID}/project/${workspace.parentId}/workspace/delete`,
+                        action: `/project/${workspace.parentId}/workspace/delete`,
                         method: 'post',
                       }
                     );

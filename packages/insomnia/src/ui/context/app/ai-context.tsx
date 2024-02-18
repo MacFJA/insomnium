@@ -50,7 +50,7 @@ export const AIProvider: FC<PropsWithChildren> = ({ children }) => {
     if (fetcherHasNotRun || projectIdHasChanged) {
       aiAccessFetcher.submit({}, {
         method: 'post',
-        action: `/organization/${DEFAULT_ORGANIZATION_ID}/project/${projectId}/workspace/${workspaceId}/ai/access`,
+        action: `/project/${projectId}/workspace/${workspaceId}/ai/access`,
       });
     }
   }, [aiAccessFetcher, projectId, workspaceId, loggedIn, prevProjectId]);
@@ -93,13 +93,13 @@ export const AIProvider: FC<PropsWithChildren> = ({ children }) => {
         generateTests: () => {
           aiGenerateTestsFetcher.submit({}, {
             method: 'post',
-            action: `/organization/${DEFAULT_ORGANIZATION_ID}/project/${projectId}/workspace/${workspaceId}/ai/generate/tests`,
+            action: `/project/${projectId}/workspace/${workspaceId}/ai/generate/tests`,
           });
         },
         generateTestsFromSpec: () => {
           aiGenerateTestsFromSpecFetcher.submit({}, {
             method: 'post',
-            action: `/organization/${DEFAULT_ORGANIZATION_ID}/project/${projectId}/workspace/${workspaceId}/ai/generate/collection-and-tests`,
+            action: `/project/${projectId}/workspace/${workspaceId}/ai/generate/collection-and-tests`,
           });
         },
         access: {

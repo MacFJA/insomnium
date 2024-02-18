@@ -78,7 +78,7 @@ export const WebSocketActionBar: FC<ActionBarProps> = ({ request, environmentId,
   const connect = (connectParams: ConnectActionParams) => {
     fetcher.submit(JSON.stringify(connectParams),
       {
-        action: `/organization/${DEFAULT_ORGANIZATION_ID}/project/${projectId}/workspace/${workspaceId}/debug/request/${requestId}/connect`,
+        action: `/project/${projectId}/workspace/${workspaceId}/debug/request/${requestId}/connect`,
         method: 'post',
         encType: 'application/json',
       });

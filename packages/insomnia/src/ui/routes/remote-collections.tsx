@@ -42,7 +42,7 @@ export const pullRemoteCollectionAction: ActionFunction = async ({ request, para
   const { workspaceId } = await pullBackendProject({ vcs: newVCS, backendProject, remoteProjects });
 
   if (workspaceId) {
-    return redirect(`/organization/${DEFAULT_ORGANIZATION_ID}/project/${projectId}/workspace/${workspaceId}/debug`);
+    return redirect(`/project/${projectId}/workspace/${workspaceId}/debug`);
   }
 
   return null;

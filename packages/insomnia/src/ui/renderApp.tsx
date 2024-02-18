@@ -36,7 +36,7 @@ export async function renderApp() {
     const e = (newObj.resources?.[0]?.resources as BaseModel[]).find(a => a.type === "Environment");
     if (w && r && e) {
       wId = w._id;
-      beginningPathForFirstTimeUser = `/organization/${DEFAULT_ORGANIZATION_ID}/project/proj_default-project/workspace/${w._id}/debug/request/${r._id}`;
+      beginningPathForFirstTimeUser = `/project/proj_default-project/workspace/${w._id}/debug/request/${r._id}`;
 
       const defaultProject = await models.project.getById('proj_default-project');
 

@@ -191,7 +191,7 @@ const Design: FC = () => {
           contents: contents,
         },
         {
-          action: `/organization/${DEFAULT_ORGANIZATION_ID}/project/${projectId}/workspace/${workspaceId}/${ACTIVITY_SPEC}/update`,
+          action: `/project/${projectId}/workspace/${workspaceId}/${ACTIVITY_SPEC}/update`,
           method: 'post',
         }
       );
@@ -302,7 +302,7 @@ const Design: FC = () => {
                         fromSync: 'true',
                       },
                       {
-                        action: `/organization/${DEFAULT_ORGANIZATION_ID}/project/${projectId}/workspace/${workspaceId}/${ACTIVITY_SPEC}/update`,
+                        action: `/project/${projectId}/workspace/${workspaceId}/${ACTIVITY_SPEC}/update`,
                         method: 'post',
                       }
                     );
@@ -364,7 +364,7 @@ const Design: FC = () => {
                     generateRequestCollectionFetcher.submit(
                       {},
                       {
-                        action: `/organization/${DEFAULT_ORGANIZATION_ID}/project/${projectId}/workspace/${workspaceId}/${ACTIVITY_SPEC}/generate-request-collection`,
+                        action: `/project/${projectId}/workspace/${workspaceId}/${ACTIVITY_SPEC}/generate-request-collection`,
                         method: 'post',
                       }
                     );

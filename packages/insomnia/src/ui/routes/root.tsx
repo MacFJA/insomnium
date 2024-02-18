@@ -239,7 +239,7 @@ const Root = () => {
           node: (
             <Link data-testid="project">
               <NavLink
-                to={`/organization/${DEFAULT_ORGANIZATION_ID}/project/${workspaceData.activeProject._id}`}
+                to={`/project/${workspaceData.activeProject._id}`}
               >
                 {workspaceData.activeProject.name}
               </NavLink>
@@ -290,7 +290,7 @@ const Root = () => {
                         {['spec', 'debug', 'test'].map(item => (
                           <NavLink
                             key={item}
-                            to={`/organization/${DEFAULT_ORGANIZATION_ID}/project/${projectId}/workspace/${workspaceId}/${item}`}
+                            to={`/project/${projectId}/workspace/${workspaceId}/${item}`}
                             className={({ isActive }) =>
                               `${
                                 isActive

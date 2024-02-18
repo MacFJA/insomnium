@@ -92,7 +92,7 @@ export const RequestUrlBar = forwardRef<RequestUrlBarHandle, Props>(({
   const connect = (connectParams: ConnectActionParams) => {
     fetcher.submit(JSON.stringify(connectParams),
       {
-        action: `/organization/${DEFAULT_ORGANIZATION_ID}/project/${projectId}/workspace/${workspaceId}/debug/request/${requestId}/connect`,
+        action: `/project/${projectId}/workspace/${workspaceId}/debug/request/${requestId}/connect`,
         method: 'post',
         encType: 'application/json',
       });
@@ -100,7 +100,7 @@ export const RequestUrlBar = forwardRef<RequestUrlBarHandle, Props>(({
   const send = (sendParams: SendActionParams) => {
     fetcher.submit(JSON.stringify(sendParams),
       {
-        action: `/organization/${DEFAULT_ORGANIZATION_ID}/project/${projectId}/workspace/${workspaceId}/debug/request/${requestId}/send`,
+        action: `/project/${projectId}/workspace/${workspaceId}/debug/request/${requestId}/send`,
         method: 'post',
         encType: 'application/json',
       });

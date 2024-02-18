@@ -20,7 +20,7 @@ export const useRequestSetter = () => {
     // console.log("XX", s);
 
     fetcher.submit(JSON.stringify(patch), {
-      action: `/organization/${DEFAULT_ORGANIZATION_ID}/project/${projectId}/workspace/${workspaceId}/debug/request/${requestId}/update`,
+      action: `/project/${projectId}/workspace/${workspaceId}/debug/request/${requestId}/update`,
       method: 'post',
       encType: 'application/json',
     });
@@ -32,7 +32,7 @@ export const useRequestMetaPatcher = () => {
   const fetcher = useFetcher();
   return (requestId: string, patch: Partial<GrpcRequestMeta> | Partial<RequestMeta>) => {
     fetcher.submit(patch, {
-      action: `/organization/${DEFAULT_ORGANIZATION_ID}/project/${projectId}/workspace/${workspaceId}/debug/request/${requestId}/update-meta`,
+      action: `/project/${projectId}/workspace/${workspaceId}/debug/request/${requestId}/update-meta`,
       method: 'post',
       encType: 'application/json',
     });
@@ -44,7 +44,7 @@ export const useRequestGroupPatcher = () => {
   const fetcher = useFetcher();
   return (requestGroupId: string, patch: Partial<RequestGroup>) => {
     fetcher.submit(JSON.stringify(patch), {
-      action: `/organization/${DEFAULT_ORGANIZATION_ID}/project/${projectId}/workspace/${workspaceId}/debug/request-group/${requestGroupId}/update`,
+      action: `/project/${projectId}/workspace/${workspaceId}/debug/request-group/${requestGroupId}/update`,
       method: 'post',
       encType: 'application/json',
     });
@@ -56,7 +56,7 @@ export const useRequestGroupMetaPatcher = () => {
   const fetcher = useFetcher();
   return (requestGroupId: string, patch: Partial<RequestGroupMeta>) => {
     fetcher.submit(patch, {
-      action: `/organization/${DEFAULT_ORGANIZATION_ID}/project/${projectId}/workspace/${workspaceId}/debug/request-group/${requestGroupId}/update-meta`,
+      action: `/project/${projectId}/workspace/${workspaceId}/debug/request-group/${requestGroupId}/update-meta`,
       method: 'post',
       encType: 'application/json',
     });
@@ -79,7 +79,7 @@ export const useWorkspaceMetaPatcher = () => {
   const fetcher = useFetcher();
   return (workspaceId: string, patch: Partial<WorkspaceMeta>) => {
     fetcher.submit(patch, {
-      action: `/organization/${DEFAULT_ORGANIZATION_ID}/project/${projectId}/workspace/${workspaceId}/update-meta`,
+      action: `/project/${projectId}/workspace/${workspaceId}/update-meta`,
       method: 'post',
       encType: 'application/json',
     });

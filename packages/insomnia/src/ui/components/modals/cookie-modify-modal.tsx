@@ -33,7 +33,7 @@ export const CookieModifyModal = ((props: ModalProps & CookieModifyModalOptions)
     updateCookieJarFetcher.submit(JSON.stringify({ patch, cookieJarId }), {
       encType: 'application/json',
       method: 'post',
-      action: `/organization/${DEFAULT_ORGANIZATION_ID}/project/${projectId}/workspace/${workspaceId}/cookieJar/update`,
+      action: `/project/${projectId}/workspace/${workspaceId}/cookieJar/update`,
     });
   };
   const handleCookieUpdate = async (nextCookie: any) => {

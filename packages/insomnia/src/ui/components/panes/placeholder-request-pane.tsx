@@ -17,7 +17,7 @@ export const PlaceholderRequestPane: FC = () => {
   const createHttpRequest = useCallback(() =>
     requestFetcher.submit({ requestType: 'HTTP', parentId: workspaceId },
       {
-        action: `/organization/${DEFAULT_ORGANIZATION_ID}/project/${projectId}/workspace/${workspaceId}/debug/request/new`,
+        action: `/project/${projectId}/workspace/${workspaceId}/debug/request/new`,
         method: 'post',
         encType: 'application/json',
       }), [requestFetcher, projectId, workspaceId]);

@@ -29,7 +29,7 @@ export const CookiesModal = ({ onHide }: ModalProps) => {
     updateCookieJarFetcher.submit(JSON.stringify({ patch, cookieJarId }), {
       encType: 'application/json',
       method: 'post',
-      action: `/organization/${DEFAULT_ORGANIZATION_ID}/project/${projectId}/workspace/${workspaceId}/cookieJar/update`,
+      action: `/project/${projectId}/workspace/${workspaceId}/cookieJar/update`,
     });
   };
   const filteredCookies = visibleCookieIndexes ? (activeCookieJar?.cookies || []).filter((_, i) => visibleCookieIndexes.includes(i)) : (activeCookieJar?.cookies || []);

@@ -33,7 +33,7 @@ export const ImportExport: FC<Props> = ({ hideSettingsModal }) => {
   useEffect(() => {
     const isIdleAndUninitialized = workspacesFetcher.state === 'idle' && !workspacesFetcher.data;
     if (isIdleAndUninitialized) {
-      workspacesFetcher.load(`/organization/${DEFAULT_ORGANIZATION_ID}/project/${projectId}`);
+      workspacesFetcher.load(`/project/${projectId}`);
     }
   }, [projectId, workspacesFetcher]);
   const projectLoaderData = workspacesFetcher?.data as ProjectLoaderData;

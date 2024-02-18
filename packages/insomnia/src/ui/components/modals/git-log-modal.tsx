@@ -26,7 +26,7 @@ export const GitLogModal: FC<Props> = ({ branch, onHide }) => {
   const isLoading = gitLogFetcher.state !== 'idle';
   useEffect(() => {
     if (gitLogFetcher.state === 'idle' && !gitLogFetcher.data) {
-      gitLogFetcher.load(`/organization/${DEFAULT_ORGANIZATION_ID}/project/${projectId}/workspace/${workspaceId}/git/log`);
+      gitLogFetcher.load(`/project/${projectId}/workspace/${workspaceId}/git/log`);
     }
   }, [projectId, workspaceId, gitLogFetcher]);
   useEffect(() => {

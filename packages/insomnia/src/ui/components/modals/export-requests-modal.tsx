@@ -38,7 +38,7 @@ export const ExportRequestsModal = ({ workspace, onHide }: { workspace: Workspac
   useEffect(() => {
     const isIdleAndUninitialized = workspaceFetcher.state === 'idle' && !workspaceFetcher.data;
     if (isIdleAndUninitialized) {
-      workspaceFetcher.load(`/organization/${DEFAULT_ORGANIZATION_ID}/project/${projectId}/workspace/${workspace._id}`);
+      workspaceFetcher.load(`/project/${projectId}/workspace/${workspace._id}`);
     }
   }, [DEFAULT_ORGANIZATION_ID, projectId, workspaceFetcher, workspace._id]);
   const workspaceLoaderData = workspaceFetcher?.data as WorkspaceLoaderData;

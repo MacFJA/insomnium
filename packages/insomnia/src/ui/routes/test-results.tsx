@@ -20,7 +20,7 @@ export const indexLoader: LoaderFunction = async ({ params }) => {
 
   const testResult = await models.unitTestResult.getLatestByParentId(workspaceId);
   if (testResult) {
-    return redirect(`/organization/${DEFAULT_ORGANIZATION_ID}/project/${projectId}/workspace/${workspaceId}/test/test-suite/${testSuiteId}/test-result/${testResult._id}`);
+    return redirect(`/project/${projectId}/workspace/${workspaceId}/test/test-suite/${testSuiteId}/test-result/${testResult._id}`);
   }
 
   return null;

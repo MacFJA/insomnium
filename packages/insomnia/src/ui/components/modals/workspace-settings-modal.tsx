@@ -100,7 +100,7 @@ export const WorkspaceSettingsModal = ({ workspace, workspaceMeta, clientCertifi
   const workspaceFetcher = useFetcher();
   const workspacePatcher = (workspaceId: string, patch: Partial<Workspace>) => {
     workspaceFetcher.submit({ ...patch, workspaceId }, {
-      action: `/organization/${DEFAULT_ORGANIZATION_ID}/project/${projectId}/workspace/update`,
+      action: `/project/${projectId}/workspace/update`,
       method: 'post',
       encType: 'application/json',
     });
@@ -149,7 +149,7 @@ export const WorkspaceSettingsModal = ({ workspace, workspaceMeta, clientCertifi
   const _handleRemoveWorkspace = async () => {
     const workspaceId = workspace._id;
     workspaceFetcher.submit({ workspaceId }, {
-      action: `/organization/${DEFAULT_ORGANIZATION_ID}/project/${projectId}/workspace/delete`,
+      action: `/project/${projectId}/workspace/delete`,
       method: 'post',
     });
   };
@@ -205,42 +205,42 @@ export const WorkspaceSettingsModal = ({ workspace, workspaceMeta, clientCertifi
 
   const newCaCert = (path: string) => {
     workspaceFetcher.submit({ parentId: workspace._id, path }, {
-      action: `/organization/${DEFAULT_ORGANIZATION_ID}/project/${projectId}/workspace/${workspace._id}/cacert/new`,
+      action: `/project/${projectId}/workspace/${workspace._id}/cacert/new`,
       method: 'post',
       encType: 'application/json',
     });
   };
   const deleteCaCert = () => {
     workspaceFetcher.submit({}, {
-      action: `/organization/${DEFAULT_ORGANIZATION_ID}/project/${projectId}/workspace/${workspace._id}/cacert/delete`,
+      action: `/project/${projectId}/workspace/${workspace._id}/cacert/delete`,
       method: 'post',
       encType: 'application/json',
     });
   };
   const toggleCaCert = (caCert: CaCertificate) => {
     workspaceFetcher.submit({ _id: caCert._id, disabled: !caCert.disabled }, {
-      action: `/organization/${DEFAULT_ORGANIZATION_ID}/project/${projectId}/workspace/${workspace._id}/cacert/update`,
+      action: `/project/${projectId}/workspace/${workspace._id}/cacert/update`,
       method: 'post',
       encType: 'application/json',
     });
   };
   const newClientCert = (certificate: Partial<ClientCertificate>) => {
     workspaceFetcher.submit(certificate, {
-      action: `/organization/${DEFAULT_ORGANIZATION_ID}/project/${projectId}/workspace/${workspace._id}/clientcert/new`,
+      action: `/project/${projectId}/workspace/${workspace._id}/clientcert/new`,
       method: 'post',
       encType: 'application/json',
     });
   };
   const deleteClientCert = (certificate: ClientCertificate) => {
     workspaceFetcher.submit({ _id: certificate._id }, {
-      action: `/organization/${DEFAULT_ORGANIZATION_ID}/project/${projectId}/workspace/${workspace._id}/clientcert/delete`,
+      action: `/project/${projectId}/workspace/${workspace._id}/clientcert/delete`,
       method: 'post',
       encType: 'application/json',
     });
   };
   const toggleClientCert = (certificate: ClientCertificate) => {
     workspaceFetcher.submit({ _id: certificate._id, disabled: !certificate.disabled }, {
-      action: `/organization/${DEFAULT_ORGANIZATION_ID}/project/${projectId}/workspace/${workspace._id}/clientcert/update`,
+      action: `/project/${projectId}/workspace/${workspace._id}/clientcert/update`,
       method: 'post',
       encType: 'application/json',
     });

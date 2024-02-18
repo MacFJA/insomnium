@@ -85,7 +85,7 @@ const UnitTestItemView = ({
                 : event.currentTarget.value,
           },
           {
-            action: `/organization/${DEFAULT_ORGANIZATION_ID}/project/${projectId}/workspace/${workspaceId}/test/test-suite/${unitTestSuite._id}/test/${unitTest._id}/update`,
+            action: `/project/${projectId}/workspace/${workspaceId}/test/test-suite/${unitTestSuite._id}/test/${unitTest._id}/update`,
             method: 'post',
           }
         )
@@ -94,7 +94,7 @@ const UnitTestItemView = ({
         deleteUnitTestFetcher.submit(
           {},
           {
-            action: `/organization/${DEFAULT_ORGANIZATION_ID}/project/${projectId}/workspace/${workspaceId}/test/test-suite/${testSuiteId}/test/${unitTest._id}/delete`,
+            action: `/project/${projectId}/workspace/${workspaceId}/test/test-suite/${testSuiteId}/test/${unitTest._id}/delete`,
             method: 'post',
           }
         )
@@ -103,7 +103,7 @@ const UnitTestItemView = ({
         runTestFetcher.submit(
           {},
           {
-            action: `/organization/${DEFAULT_ORGANIZATION_ID}/project/${projectId}/workspace/${workspaceId}/test/test-suite/${testSuiteId}/test/${unitTest._id}/run`,
+            action: `/project/${projectId}/workspace/${workspaceId}/test/test-suite/${testSuiteId}/test/${unitTest._id}/run`,
             method: 'post',
           }
         )
@@ -122,7 +122,7 @@ const UnitTestItemView = ({
                 requestId: unitTest.requestId || '',
               },
               {
-                action: `/organization/${DEFAULT_ORGANIZATION_ID}/project/${projectId}/workspace/${workspaceId}/test/test-suite/${unitTestSuite._id}/test/${unitTest._id}/update`,
+                action: `/project/${projectId}/workspace/${workspaceId}/test/test-suite/${unitTestSuite._id}/test/${unitTest._id}/update`,
                 method: 'post',
               }
             )
@@ -169,7 +169,7 @@ const UnitTestItemView = ({
               requestId: unitTest.requestId || '',
             },
             {
-              action: `/organization/${DEFAULT_ORGANIZATION_ID}/project/${projectId}/workspace/${workspaceId}/test/test-suite/${unitTestSuite._id}/test/${unitTest._id}/update`,
+              action: `/project/${projectId}/workspace/${workspaceId}/test/test-suite/${unitTestSuite._id}/test/${unitTest._id}/update`,
               method: 'post',
             }
           )
@@ -192,7 +192,7 @@ export const indexLoader: LoaderFunction = async ({ params }) => {
 
     if (unitTestSuite) {
       return redirect(
-        `/organization/${DEFAULT_ORGANIZATION_ID}/project/${projectId}/workspace/${workspaceId}/test/test-suite/${unitTestSuite._id}`
+        `/project/${projectId}/workspace/${workspaceId}/test/test-suite/${unitTestSuite._id}`
       );
     }
   }
@@ -200,7 +200,7 @@ export const indexLoader: LoaderFunction = async ({ params }) => {
   const unitTestSuites = await models.unitTestSuite.findByParentId(workspaceId);
   if (unitTestSuites.length > 0) {
     return redirect(
-      `/organization/${DEFAULT_ORGANIZATION_ID}/project/${projectId}/workspace/${workspaceId}/test/test-suite/${unitTestSuites[0]._id}`
+      `/project/${projectId}/workspace/${workspaceId}/test/test-suite/${unitTestSuites[0]._id}`
     );
   }
   return null;
@@ -271,7 +271,7 @@ const TestSuiteRoute = () => {
             onSubmit={name => name && renameTestSuiteFetcher.submit(
               { name },
               {
-                action: `/organization/${DEFAULT_ORGANIZATION_ID}/project/${projectId}/workspace/${workspaceId}/test/test-suite/${unitTestSuite._id}/rename`,
+                action: `/project/${projectId}/workspace/${workspaceId}/test/test-suite/${unitTestSuite._id}/rename`,
                 method: 'post',
               }
             )
@@ -295,7 +295,7 @@ const TestSuiteRoute = () => {
                   },
                   {
                     method: 'post',
-                    action: `/organization/${DEFAULT_ORGANIZATION_ID}/project/${projectId}/workspace/${workspaceId}/test/test-suite/${unitTestSuite._id}/test/new`,
+                    action: `/project/${projectId}/workspace/${workspaceId}/test/test-suite/${unitTestSuite._id}/test/new`,
                   }
                 );
               },
@@ -312,7 +312,7 @@ const TestSuiteRoute = () => {
               {},
               {
                 method: 'post',
-                action: `/organization/${DEFAULT_ORGANIZATION_ID}/project/${projectId}/workspace/${workspaceId}/test/test-suite/${unitTestSuite._id}/run-all-tests`,
+                action: `/project/${projectId}/workspace/${workspaceId}/test/test-suite/${unitTestSuite._id}/run-all-tests`,
               }
             );
           }}

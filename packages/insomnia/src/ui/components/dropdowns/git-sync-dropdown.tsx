@@ -73,7 +73,7 @@ export const GitSyncDropdown: FC<Props> = ({ className, gitRepository, isInsomni
     ) {
       console.log('[git:fetcher] Fetching git repo data');
       gitRepoDataFetcher.submit({}, {
-        action: `/organization/${DEFAULT_ORGANIZATION_ID}/project/${projectId}/workspace/${workspaceId}/git/repo`,
+        action: `/project/${projectId}/workspace/${workspaceId}/git/repo`,
         method: 'post',
       });
     }
@@ -92,7 +92,7 @@ export const GitSyncDropdown: FC<Props> = ({ className, gitRepository, isInsomni
     if (shouldFetchGitRepoStatus) {
       console.log('[git:fetcher] Fetching git repo status');
       gitStatusFetcher.submit({}, {
-        action: `/organization/${DEFAULT_ORGANIZATION_ID}/project/${projectId}/workspace/${workspaceId}/git/status`,
+        action: `/project/${projectId}/workspace/${workspaceId}/git/status`,
         method: 'post',
       });
     }
@@ -148,7 +148,7 @@ export const GitSyncDropdown: FC<Props> = ({ className, gitRepository, isInsomni
         force: `${force}`,
       },
       {
-        action: `/organization/${DEFAULT_ORGANIZATION_ID}/project/${projectId}/workspace/${workspaceId}/git/push`,
+        action: `/project/${projectId}/workspace/${workspaceId}/git/push`,
         method: 'post',
       }
     );
@@ -196,7 +196,7 @@ export const GitSyncDropdown: FC<Props> = ({ className, gitRepository, isInsomni
         gitPullFetcher.submit(
           {},
           {
-            action: `/organization/${DEFAULT_ORGANIZATION_ID}/project/${projectId}/workspace/${workspaceId}/git/pull`,
+            action: `/project/${projectId}/workspace/${workspaceId}/git/pull`,
             method: 'post',
           }
         );
@@ -224,7 +224,7 @@ export const GitSyncDropdown: FC<Props> = ({ className, gitRepository, isInsomni
         gitFetchFetcher.submit(
           {},
           {
-            action: `/organization/${DEFAULT_ORGANIZATION_ID}/project/${projectId}/workspace/${workspaceId}/git/fetch`,
+            action: `/project/${projectId}/workspace/${workspaceId}/git/fetch`,
             method: 'post',
           }
         );
@@ -236,7 +236,7 @@ export const GitSyncDropdown: FC<Props> = ({ className, gitRepository, isInsomni
     gitFetchFetcher.submit(
       {},
       {
-        action: `/organization/${DEFAULT_ORGANIZATION_ID}/project/${projectId}/workspace/${workspaceId}/git/fetch`,
+        action: `/project/${projectId}/workspace/${workspaceId}/git/fetch`,
         method: 'post',
       }
     );
@@ -395,7 +395,7 @@ export const GitSyncDropdown: FC<Props> = ({ className, gitRepository, isInsomni
                           branch,
                         },
                         {
-                          action: `/organization/${DEFAULT_ORGANIZATION_ID}/project/${projectId}/workspace/${workspaceId}/git/branch/checkout`,
+                          action: `/project/${projectId}/workspace/${workspaceId}/git/branch/checkout`,
                           method: 'post',
                         }
                       );

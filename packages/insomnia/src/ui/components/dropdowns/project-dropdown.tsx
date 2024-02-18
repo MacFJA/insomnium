@@ -46,7 +46,7 @@ export const ProjectDropdown: FC<Props> = ({ project }) => {
           {},
           {
             method: 'post',
-            action: `/organization/${DEFAULT_ORGANIZATION_ID}/project/${projectId}/delete`,
+            action: `/project/${projectId}/delete`,
           }
         ),
     },

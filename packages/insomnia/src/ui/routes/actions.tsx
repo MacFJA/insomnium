@@ -30,7 +30,7 @@ export const createNewProjectAction: ActionFunction = async ({ request, params }
   guard(typeof name === 'string', 'Name is required');
   const project = await models.project.create({ name });
 
-  return redirect(`/organization/${DEFAULT_ORGANIZATION_ID}/project/${project._id}`);
+  return redirect(`/project/${project._id}`);
 };
 
 export const renameProjectAction: ActionFunction = async ({
@@ -68,7 +68,7 @@ export const deleteProjectAction: ActionFunction = async ({ params }) => {
   await models.stats.incrementDeletedRequestsForDescendents(project);
   await models.project.remove(project);
 
-  return redirect(`/organization/${DEFAULT_ORGANIZATION_ID}/project/${DEFAULT_PROJECT_ID}`);
+  return redirect(`/project/${DEFAULT_PROJECT_ID}`);
 };
 
 // Workspace
@@ -122,7 +122,7 @@ export const createNewWorkspaceAction: ActionFunction = async ({
   // }
 
   return redirect(
-    `/organization/${DEFAULT_ORGANIZATION_ID}/project/${projectId}/workspace/${workspace._id}/${workspace.scope === 'collection' ? ACTIVITY_DEBUG : ACTIVITY_SPEC
+    `/project/${projectId}/workspace/${workspace._id}/${workspace.scope === 'collection' ? ACTIVITY_DEBUG : ACTIVITY_SPEC
     }`
   );
 };
@@ -159,8 +159,8 @@ export const deleteWorkspaceAction: ActionFunction = async ({
   } catch (err) {
     console.warn('Failed to remove project from VCS', err);
   }
-  console.log(`redirecting to /organization/${DEFAULT_ORGANIZATION_ID}/project/${projectId}`);
-  return redirect(`/organization/${DEFAULT_ORGANIZATION_ID}/project/${projectId}`);
+  console.log(`redirecting to /project/${projectId}`);
+  return redirect(`/project/${projectId}`);
 };
 
 export const duplicateWorkspaceAction: ActionFunction = async ({ request, params }) => {
@@ -217,7 +217,7 @@ export const duplicateWorkspaceAction: ActionFunction = async ({ request, params
   }
 
   return redirect(
-    `/organization/${DEFAULT_ORGANIZATION_ID}/project/${projectId}/workspace/${newWorkspace._id}/${newWorkspace.scope === 'collection' ? ACTIVITY_DEBUG : ACTIVITY_SPEC
+    `/project/${projectId}/workspace/${newWorkspace._id}/${newWorkspace.scope === 'collection' ? ACTIVITY_DEBUG : ACTIVITY_SPEC
     }`
   );
 };
@@ -267,7 +267,7 @@ export const createNewTestSuiteAction: ActionFunction = async ({
     name,
   });
 
-  return redirect(`/organization/${DEFAULT_ORGANIZATION_ID}/project/${projectId}/workspace/${workspaceId}/test/test-suite/${unitTestSuite._id}`);
+  return redirect(`/project/${projectId}/workspace/${workspaceId}/test/test-suite/${unitTestSuite._id}`);
 };
 
 export const deleteTestSuiteAction: ActionFunction = async ({ params }) => {
@@ -282,7 +282,7 @@ export const deleteTestSuiteAction: ActionFunction = async ({ params }) => {
 
   await models.unitTestSuite.remove(unitTestSuite);
 
-  return redirect(`/organization/${DEFAULT_ORGANIZATION_ID}/project/${projectId}/workspace/${workspaceId}/test`);
+  return redirect(`/project/${projectId}/workspace/${workspaceId}/test`);
 };
 
 export const runAllTestsAction: ActionFunction = async ({
@@ -317,7 +317,7 @@ export const runAllTestsAction: ActionFunction = async ({
     parentId: workspaceId,
   });
 
-  return redirect(`/organization/${DEFAULT_ORGANIZATION_ID}/project/${projectId}/workspace/${workspaceId}/test/test-suite/${testSuiteId}/test-result/${testResult._id}`);
+  return redirect(`/project/${projectId}/workspace/${workspaceId}/test/test-suite/${testSuiteId}/test-result/${testResult._id}`);
 };
 
 export const renameTestSuiteAction: ActionFunction = async ({ request, params }) => {
@@ -426,7 +426,7 @@ export const runTestAction: ActionFunction = async ({ params }) => {
     parentId: unitTest.parentId,
   });
 
-  return redirect(`/organization/${DEFAULT_ORGANIZATION_ID}/project/${projectId}/workspace/${workspaceId}/test/test-suite/${testSuiteId}/test-result/${testResult._id}`);
+  return redirect(`/project/${projectId}/workspace/${workspaceId}/test/test-suite/${testSuiteId}/test-result/${testResult._id}`);
 };
 
 // Api Spec
@@ -494,7 +494,7 @@ export const generateCollectionFromApiSpecAction: ActionFunction = async ({
     workspaceId,
   });
 
-  return redirect(`/organization/${DEFAULT_ORGANIZATION_ID}/project/${projectId}/workspace/${workspaceId}/${ACTIVITY_DEBUG}`);
+  return redirect(`/project/${projectId}/workspace/${workspaceId}/${ACTIVITY_DEBUG}`);
 };
 
 export const generateCollectionAndTestsAction: ActionFunction = async ({ params }) => {

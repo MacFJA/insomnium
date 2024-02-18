@@ -63,7 +63,7 @@ export const ResponseHistoryDropdown = ({
       window.main.webSocket.closeAll();
     }
     fetcher.submit({}, {
-      action: `/organization/${DEFAULT_ORGANIZATION_ID}/project/${projectId}/workspace/${workspaceId}/debug/request/${requestId}/response/delete-all`,
+      action: `/project/${projectId}/workspace/${workspaceId}/debug/request/${requestId}/response/delete-all`,
       method: 'post',
       encType: 'application/json',
     });
@@ -76,7 +76,7 @@ export const ResponseHistoryDropdown = ({
       }
     }
     fetcher.submit({ responseId: activeResponse._id }, {
-      action: `/organization/${DEFAULT_ORGANIZATION_ID}/project/${projectId}/workspace/${workspaceId}/debug/request/${requestId}/response/delete`,
+      action: `/project/${projectId}/workspace/${workspaceId}/debug/request/${requestId}/response/delete`,
       method: 'post',
       encType: 'application/json',
     });

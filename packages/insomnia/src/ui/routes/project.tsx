@@ -92,7 +92,7 @@ export const indexLoader: LoaderFunction = async ({ params }) => {
   if (prevOrganizationLocation) {
     const match = matchPath(
       {
-        path: `/organization/${DEFAULT_ORGANIZATION_ID}/project/:projectId`,
+        path: `/project/:projectId`,
         end: false,
       },
       prevOrganizationLocation
@@ -100,7 +100,7 @@ export const indexLoader: LoaderFunction = async ({ params }) => {
 
     if (match && match.params.projectId) {
       return redirect(
-        `/organization/${DEFAULT_ORGANIZATION_ID}/project/${match?.params.projectId}`
+        `/project/${match?.params.projectId}`
       );
     }
   }
@@ -111,12 +111,12 @@ export const indexLoader: LoaderFunction = async ({ params }) => {
     );
     if (localProjects[0]._id) {
       return redirect(
-        `/organization/${DEFAULT_ORGANIZATION_ID}/project/${localProjects[0]._id}`
+        `/project/${localProjects[0]._id}`
       );
     }
   } else {
     const projectId = DEFAULT_ORGANIZATION_ID;
-    return redirect(`/organization/${DEFAULT_ORGANIZATION_ID}/project/${projectId}`);
+    return redirect(`/project/${projectId}`);
   }
 
   return;
@@ -329,7 +329,7 @@ const ProjectRoute: FC = () => {
             scope: 'collection',
           },
           {
-            action: `/organization/${DEFAULT_ORGANIZATION_ID}/project/${activeProject._id}/workspace/new`,
+            action: `/project/${activeProject._id}/workspace/new`,
             method: 'post',
           }
         );
@@ -351,7 +351,7 @@ const ProjectRoute: FC = () => {
             scope: 'design',
           },
           {
-            action: `/organization/${DEFAULT_ORGANIZATION_ID}/project/${activeProject._id}/workspace/new`,
+            action: `/project/${activeProject._id}/workspace/new`,
             method: 'post',
           }
         );
@@ -504,7 +504,7 @@ const ProjectRoute: FC = () => {
                                 name,
                               },
                               {
-                                action: `/organization/${DEFAULT_ORGANIZATION_ID}/project/new`,
+                                action: `/project/new`,
                                 method: 'post',
                               }
                             ),
@@ -528,7 +528,7 @@ const ProjectRoute: FC = () => {
                     if (keys !== 'all') {
                       const value = keys.values().next().value;
                       navigate({
-                        pathname: `/organization/${DEFAULT_ORGANIZATION_ID}/project/${value}`,
+                        pathname: `/project/${value}`,
                         search: searchParams.toString(),
                       });
                     }
@@ -729,7 +729,7 @@ const ProjectRoute: FC = () => {
                 items={workspaces}
                 onAction={key => {
                   navigate(
-                    `/organization/${DEFAULT_ORGANIZATION_ID}/project/${projectId}/workspace/${key}/debug`
+                    `/project/${projectId}/workspace/${key}/debug`
                   );
                 }}
                 className="flex-1 overflow-y-auto data-[empty]:flex data-[empty]:justify-center grid [grid-template-columns:repeat(auto-fit,200px)] [grid-template-rows:repeat(auto-fit,200px)] gap-4 p-[--padding-md]"
