@@ -10,7 +10,6 @@ import { ConnectActionParams } from '../../routes/request';
 import { OneLineEditor, OneLineEditorHandle } from '../codemirror/one-line-editor';
 import { createKeybindingsHandler, useDocBodyKeyboardShortcuts } from '../keydown-binder';
 import { DisconnectButton } from './disconnect-button';
-import { DEFAULT_ORGANIZATION_ID } from "../../../models/organization"
 
 const Button = styled.button<{ warning?: boolean }>(({ warning }) => ({
   paddingRight: 'var(--padding-md)',

@@ -1,7 +1,6 @@
 import React, { createContext, FC, PropsWithChildren, useContext, useEffect } from 'react';
 import { useFetcher, useFetchers, useParams } from 'react-router-dom';
 import { usePrevious } from 'react-use';
-import { DEFAULT_ORGANIZATION_ID } from "../../../models/organization"
 
 const AIContext = createContext({
   generating: false,

@@ -22,7 +22,6 @@ import { configGenerators, showGenerateConfigModal } from '../modals/generate-co
 import { ImportModal } from '../modals/import-modal';
 import { WorkspaceDuplicateModal } from '../modals/workspace-duplicate-modal';
 import { WorkspaceSettingsModal } from '../modals/workspace-settings-modal';
-import { DEFAULT_ORGANIZATION_ID } from "../../../models/organization"
 
 console.log("[configGenerators] ", configGenerators);
 

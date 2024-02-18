@@ -21,7 +21,6 @@ import { showError, showModal, showPrompt } from '../modals';
 import { EnvironmentEditModal } from '../modals/environment-edit-modal';
 import { PasteCurlModal } from '../modals/paste-curl-modal';
 import { RequestGroupSettingsModal } from '../modals/request-group-settings-modal';
-import { DEFAULT_ORGANIZATION_ID } from "../../../models/organization"
 interface Props extends Partial<DropdownProps> {
   requestGroup: RequestGroup;
 }

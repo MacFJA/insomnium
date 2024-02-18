@@ -9,7 +9,6 @@ import { ModalBody } from '../base/modal-body';
 import { ModalHeader } from '../base/modal-header';
 import { PromptButton } from '../base/prompt-button';
 import { HelpTooltip } from '../help-tooltip';
-import { DEFAULT_ORGANIZATION_ID } from "../../../models/organization"
 
 export interface ProjectSettingsModalProps extends ModalProps {
   project: Project;

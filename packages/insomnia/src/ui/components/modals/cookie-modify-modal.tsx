@@ -15,7 +15,6 @@ import { ModalFooter } from '../base/modal-footer';
 import { ModalHeader } from '../base/modal-header';
 import { PanelContainer, TabItem, Tabs } from '../base/tabs';
 import { OneLineEditor } from '../codemirror/one-line-editor';
-import { DEFAULT_ORGANIZATION_ID } from "../../../models/organization"
 export interface CookieModifyModalOptions {
   cookie: Cookie;
 }

@@ -26,7 +26,6 @@ import { showError, showModal, showPrompt } from '../modals';
 import { AlertModal } from '../modals/alert-modal';
 import { GenerateCodeModal } from '../modals/generate-code-modal';
 import { RequestSettingsModal } from '../modals/request-settings-modal';
-import { DEFAULT_ORGANIZATION_ID } from "../../../models/organization"
 
 interface Props extends Omit<DropdownProps, 'children'> {
   activeEnvironment: Environment;

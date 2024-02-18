@@ -11,7 +11,6 @@ import { ModalBody } from '../base/modal-body';
 import { ModalFooter } from '../base/modal-footer';
 import { ModalHeader } from '../base/modal-header';
 import { CookieList } from '../cookie-list';
-import { DEFAULT_ORGANIZATION_ID } from "../../../models/organization"
 
 export const CookiesModal = ({ onHide }: ModalProps) => {
   const modalRef = useRef<ModalHandle>(null);

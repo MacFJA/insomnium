@@ -16,7 +16,6 @@ import { showAlert } from '..';
 import { CustomRepositorySettingsFormGroup } from './custom-repository-settings-form-group';
 import { GitHubRepositorySetupFormGroup } from './github-repository-settings-form-group';
 import { GitLabRepositorySetupFormGroup } from './gitlab-repository-settings-form-group';
-import { DEFAULT_ORGANIZATION_ID } from "../../../../models/organization"
 
 const TabPill = styled.div({
   display: 'flex',

@@ -59,7 +59,6 @@ import { useSettingsPatcher } from '../hooks/use-request';
 import Modals from './modals';
 
 import { WorkspaceLoaderData } from './workspace';
-import { DEFAULT_ORGANIZATION_ID } from "../../models/organization"
 
 /**** ><> ↑ --------- Hooks and Containers */
 export interface RootLoaderData {

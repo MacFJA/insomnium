@@ -40,11 +40,6 @@ import { CaCertificate } from '../../models/ca-certificate';
 import { ClientCertificate } from '../../models/client-certificate';
 import { sortProjects } from '../../models/helpers/project';
 import {
-  DEFAULT_ORGANIZATION_ID,
-  defaultOrganization,
-  Organization,
-} from '../../models/organization';
-import {
   DEFAULT_PROJECT_ID,
   isRemoteProject,
   Project,
@@ -85,17 +80,17 @@ export interface WorkspaceWithMetadata {
 }
 
 export const indexLoader: LoaderFunction = async ({ params }) => {
-  const prevOrganizationLocation = localStorage.getItem(
-    `locationHistoryEntry:${DEFAULT_ORGANIZATION_ID}`
+  const prevProjectLocation = localStorage.getItem(
+    `locationHistoryEntry:${DEFAULT_PROJECT_ID}`
   );
 
-  if (prevOrganizationLocation) {
+  if (prevProjectLocation) {
     const match = matchPath(
       {
         path: `/project/:projectId`,
         end: false,
       },
-      prevOrganizationLocation
+      prevProjectLocation
     );
 
     if (match && match.params.projectId) {
@@ -105,19 +100,15 @@ export const indexLoader: LoaderFunction = async ({ params }) => {
     }
   }
 
-  if (models.organization.DEFAULT_ORGANIZATION_ID === DEFAULT_ORGANIZATION_ID) {
-    const localProjects = (await models.project.all()).filter(
-      proj => !isRemoteProject(proj)
+  const localProjects = (await models.project.all()).filter(
+    proj => !isRemoteProject(proj)
+  );
+  if (localProjects[0]._id) {
+    return redirect(
+      `/project/${localProjects[0]._id}`
     );
-    if (localProjects[0]._id) {
-      return redirect(
-        `/project/${localProjects[0]._id}`
-      );
-    }
-  } else {
-    const projectId = DEFAULT_ORGANIZATION_ID;
-    return redirect(`/project/${projectId}`);
   }
+
 
   return;
 };
@@ -267,16 +258,16 @@ export const loader: LoaderFunction = async ({
 
   const allProjects = await models.project.all();
 
-  const organizationProjects = allProjects.filter(proj => !isRemoteProject(proj))
+  const localProjects = allProjects.filter(proj => !isRemoteProject(proj))
 
-  const projects = sortProjects(organizationProjects).filter(p =>
+  const projects = sortProjects(localProjects).filter(p =>
     p.name.toLowerCase().includes(projectName.toLowerCase())
   );
 
   return {
     workspaces,
     projects,
-    projectsCount: organizationProjects.length,
+    projectsCount: projects.length,
     activeProject: project,
     allFilesCount: workspacesWithMetaData.length,
     documentsCount: workspacesWithMetaData.filter(

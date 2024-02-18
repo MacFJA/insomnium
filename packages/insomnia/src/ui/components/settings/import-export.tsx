@@ -14,7 +14,6 @@ import { Link } from '../base/link';
 import { ExportRequestsModal } from '../modals/export-requests-modal';
 import { ImportModal } from '../modals/import-modal';
 import { Button } from '../themed-button';
-import { DEFAULT_ORGANIZATION_ID } from "../../../models/organization"
 interface Props {
   hideSettingsModal: () => void;
 }

@@ -6,7 +6,6 @@ import * as models from '../../models';
 import { UnitTestResult } from '../../models/unit-test-result';
 import { guard } from '../../utils/guard';
 import { ListGroup, UnitTestResultItem } from '../components/list-group';
-import { DEFAULT_ORGANIZATION_ID } from "../../models/organization"
 
 interface TestResultsData {
   testResult: UnitTestResult;

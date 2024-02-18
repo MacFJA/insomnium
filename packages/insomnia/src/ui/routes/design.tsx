@@ -35,7 +35,6 @@ import {
   useGitVCSVersion,
 } from '../hooks/use-vcs-version';
 import { WorkspaceSyncDropdown } from '../components/dropdowns/workspace-sync-dropdown';
-import { DEFAULT_ORGANIZATION_ID } from "../../models/organization"
 const EmptySpaceHelper = styled.div({
   display: 'flex',
   alignItems: 'flex-start',

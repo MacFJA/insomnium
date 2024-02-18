@@ -31,7 +31,6 @@ import { GitRepositorySettingsModal } from '../modals/git-repository-settings-mo
 import { GitStagingModal } from '../modals/git-staging-modal';
 import { Button } from '../themed-button';
 import { Tooltip } from '../tooltip';
-import { DEFAULT_ORGANIZATION_ID } from "../../../models/organization"
 
 interface Props {
   gitRepository: GitRepository | null;

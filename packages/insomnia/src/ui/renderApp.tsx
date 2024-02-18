@@ -11,7 +11,6 @@ import { dummyStartingWorkspace, importPure } from '../common/import';
 import { Workspace } from '../models/workspace';
 import { BaseModel } from '../models';
 import { getProductName } from '../common/constants';
-import { DEFAULT_ORGANIZATION_ID } from "../models/organization"
 
 export async function renderApp() {
 

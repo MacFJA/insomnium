@@ -11,7 +11,6 @@ import { importResourcesToWorkspace, scanResources } from '../../common/import';
 import { generateId } from '../../common/misc';
 import * as models from '../../models';
 import { getById, update } from '../../models/helpers/request-operations';
-import { DEFAULT_ORGANIZATION_ID } from '../../models/organization';
 import { DEFAULT_PROJECT_ID, isRemoteProject } from '../../models/project';
 import { isRequest, Request } from '../../models/request';
 import { isRequestGroup, isRequestGroupId } from '../../models/request-group';
@@ -500,7 +499,6 @@ export const generateCollectionFromApiSpecAction: ActionFunction = async ({
 export const generateCollectionAndTestsAction: ActionFunction = async ({ params }) => {
   const { projectId, workspaceId } = params;
 
-  guard(typeof DEFAULT_ORGANIZATION_ID === 'string', 'Organization ID is required');
   guard(typeof projectId === 'string', 'Project ID is required');
   guard(typeof workspaceId === 'string', 'Workspace ID is required');
 
@@ -638,7 +636,6 @@ export const generateCollectionAndTestsAction: ActionFunction = async ({ params 
 export const generateTestsAction: ActionFunction = async ({ params }) => {
   const { projectId, workspaceId } = params;
 
-  guard(typeof DEFAULT_ORGANIZATION_ID === 'string', 'Organization ID is required');
   guard(typeof projectId === 'string', 'Project ID is required');
   guard(typeof workspaceId === 'string', 'Workspace ID is required');
 

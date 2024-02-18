@@ -14,7 +14,6 @@ import { ModalHeader } from '../base/modal-header';
 import { PromptButton } from '../base/prompt-button';
 import { Tooltip } from '../tooltip';
 import { showAlert } from '.';
-import { DEFAULT_ORGANIZATION_ID } from "../../../models/organization"
 
 interface Item {
   path: string;

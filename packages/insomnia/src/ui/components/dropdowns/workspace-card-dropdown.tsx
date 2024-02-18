@@ -24,7 +24,6 @@ import { ImportModal } from '../modals/import-modal';
 import { WorkspaceDuplicateModal } from '../modals/workspace-duplicate-modal';
 import { WorkspaceSettingsModal } from '../modals/workspace-settings-modal';
 import { SvgIcon } from '../svg-icon';
-import { DEFAULT_ORGANIZATION_ID } from "../../../models/organization"
 
 interface Props {
   workspace: Workspace;

@@ -11,7 +11,6 @@ import { ModalFooter } from '../base/modal-footer';
 import { ModalHeader } from '../base/modal-header';
 import { PromptButton } from '../base/prompt-button';
 import { showAlert } from '.';
-import { DEFAULT_ORGANIZATION_ID } from "../../../models/organization"
 
 type Props = ModalProps & {
   activeBranch: string;

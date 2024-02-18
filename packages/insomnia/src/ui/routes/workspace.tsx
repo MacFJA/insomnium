@@ -109,9 +109,9 @@ export const workspaceLoader: LoaderFunction = async ({
 
   const allProjects = await models.project.all();
 
-  const organizationProjects = allProjects.filter(proj => !isRemoteProject(proj));
+  const localProjects = allProjects.filter(proj => !isRemoteProject(proj));
 
-  const projects = sortProjects(organizationProjects);
+  const projects = sortProjects(localProjects);
   const syncItemsList: (
     | Workspace
     | Environment

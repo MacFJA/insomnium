@@ -28,7 +28,6 @@ import { guard } from '../../utils/guard';
 
 import { updateMimeType } from '../components/dropdowns/content-type-dropdown';
 import { CreateRequestType } from '../hooks/use-request';
-import { DEFAULT_ORGANIZATION_ID } from "../../models/organization"
 
 export interface WebSocketRequestLoaderData {
   activeRequest: WebSocketRequest;

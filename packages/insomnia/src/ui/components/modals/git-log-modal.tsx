@@ -9,7 +9,6 @@ import { ModalFooter } from '../base/modal-footer';
 import { ModalHeader } from '../base/modal-header';
 import { TimeFromNow } from '../time-from-now';
 import { Tooltip } from '../tooltip';
-import { DEFAULT_ORGANIZATION_ID } from "../../../models/organization"
 
 type Props = ModalProps & {
   branch: string;

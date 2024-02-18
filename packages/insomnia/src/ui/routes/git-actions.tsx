@@ -10,7 +10,6 @@ import * as models from '../../models';
 import { isApiSpec } from '../../models/api-spec';
 import { GitRepository } from '../../models/git-repository';
 import { createGitRepository } from '../../models/helpers/git-repository-operations';
-import { DEFAULT_ORGANIZATION_ID } from '../../models/organization';
 import { DEFAULT_PROJECT_ID } from '../../models/project';
 import {
   isWorkspace,

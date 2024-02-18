@@ -19,7 +19,6 @@ import { StatusTag } from '../tags/status-tag';
 import { TimeTag } from '../tags/time-tag';
 import { URLTag } from '../tags/url-tag';
 import { TimeFromNow } from '../time-from-now';
-import { DEFAULT_ORGANIZATION_ID } from "../../../models/organization"
 
 export const ResponseHistoryDropdown = ({
   activeResponse,

@@ -12,7 +12,6 @@ import { ModalHeader } from '../base/modal-header';
 import { CodeEditorHandle } from '../codemirror/code-editor';
 import { HelpTooltip } from '../help-tooltip';
 import { MarkdownEditor } from '../markdown-editor';
-import { DEFAULT_ORGANIZATION_ID } from "../../../models/organization"
 
 export interface RequestGroupSettingsModalOptions {
   requestGroup: RequestGroup;

@@ -18,7 +18,6 @@ import { PromptButton } from '../base/prompt-button';
 import { EnvironmentEditor, EnvironmentEditorHandle } from '../editors/environment-editor';
 import { HelpTooltip } from '../help-tooltip';
 import { Tooltip } from '../tooltip';
-import { DEFAULT_ORGANIZATION_ID } from "../../../models/organization"
 
 const ROOT_ENVIRONMENT_NAME = 'Base Environment';
 

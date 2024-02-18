@@ -8,7 +8,6 @@ import { BackendProject } from '../../sync/types';
 import { pullBackendProject } from '../../sync/vcs/pull-backend-project';
 import { getVCS } from '../../sync/vcs/vcs';
 import { guard } from '../../utils/guard';
-import { DEFAULT_ORGANIZATION_ID } from "../../models/organization"
 
 export const pullRemoteCollectionAction: ActionFunction = async ({ request, params }) => {
   const { projectId } = params;

@@ -5,7 +5,6 @@ import { useFetcher, useParams } from 'react-router-dom';
 import { RootLoaderData } from '../../routes/root';
 import { Hotkey } from '../hotkey';
 import { Pane, PaneBody, PaneHeader } from './pane';
-import { DEFAULT_ORGANIZATION_ID } from "../../../models/organization"
 
 export const PlaceholderRequestPane: FC = () => {
   const {

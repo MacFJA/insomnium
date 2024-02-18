@@ -30,7 +30,6 @@ import { SyncHistoryModal } from '../modals/sync-history-modal';
 import { SyncStagingModal } from '../modals/sync-staging-modal';
 import { Button } from '../themed-button';
 import { Tooltip } from '../tooltip';
-import { DEFAULT_ORGANIZATION_ID } from "../../../models/organization"
 // TODO: handle refetching logic in one place not here in a component
 
 // Refresh dropdown periodically

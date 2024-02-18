@@ -10,7 +10,6 @@ import { Modal, type ModalHandle, ModalProps } from '../base/modal';
 import { ModalBody } from '../base/modal-body';
 import { ModalFooter } from '../base/modal-footer';
 import { ModalHeader } from '../base/modal-header';
-import { DEFAULT_ORGANIZATION_ID } from "../../../models/organization"
 
 interface WorkspaceDuplicateModalProps extends ModalProps {
   workspace: Workspace;

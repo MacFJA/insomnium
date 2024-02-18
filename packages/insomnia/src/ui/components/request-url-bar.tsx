@@ -24,7 +24,6 @@ import { MethodDropdown } from './dropdowns/method-dropdown';
 import { createKeybindingsHandler, useDocBodyKeyboardShortcuts } from './keydown-binder';
 import { GenerateCodeModal } from './modals/generate-code-modal';
 import { showAlert, showModal, showPrompt } from './modals/index';
-import { DEFAULT_ORGANIZATION_ID } from "../../models/organization"
 
 const StyledDropdownButton = styled(DropdownButton)({
   '&:hover:not(:disabled)': {

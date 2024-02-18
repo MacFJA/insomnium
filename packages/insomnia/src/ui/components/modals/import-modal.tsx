@@ -18,7 +18,6 @@ import {
 import { Modal, ModalHandle, ModalProps } from '../base/modal';
 import { ModalHeader } from '../base/modal-header';
 import { Button } from '../themed-button';
-import { DEFAULT_ORGANIZATION_ID } from "../../../models/organization"
 
 const Pill = styled.div({
   display: 'flex',
@@ -705,7 +704,6 @@ const ImportResourcesForm = ({
           action="/import/resources"
           id={id}
         >
-          <input hidden name="organizationId" readOnly value={DEFAULT_ORGANIZATION_ID} />
           <input hidden name="projectId" readOnly value={defaultProjectId} />
           <input hidden name="workspaceId" readOnly value={defaultWorkspaceId} />
         </form>

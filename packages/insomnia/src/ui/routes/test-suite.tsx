@@ -24,7 +24,6 @@ import { EmptyStatePane } from '../components/panes/empty-state-pane';
 import { SvgIcon } from '../components/svg-icon';
 import { Button } from '../components/themed-button';
 import { UnitTestEditable } from '../components/unit-test-editable';
-import { DEFAULT_ORGANIZATION_ID } from "../../models/organization"
 
 const HeaderButton = styled(Button)({
   '&&': {

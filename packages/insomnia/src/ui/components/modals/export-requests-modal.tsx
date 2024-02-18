@@ -15,7 +15,6 @@ import { ModalBody } from '../base/modal-body';
 import { ModalFooter } from '../base/modal-footer';
 import { ModalHeader } from '../base/modal-header';
 import { Tree } from '../export-requests/tree';
-import { DEFAULT_ORGANIZATION_ID } from "../../../models/organization"
 
 export interface Node {
   doc: Request | WebSocketRequest | GrpcRequest | RequestGroup;
@@ -40,7 +39,7 @@ export const ExportRequestsModal = ({ workspace, onHide }: { workspace: Workspac
     if (isIdleAndUninitialized) {
       workspaceFetcher.load(`/project/${projectId}/workspace/${workspace._id}`);
     }
-  }, [DEFAULT_ORGANIZATION_ID, projectId, workspaceFetcher, workspace._id]);
+  }, [projectId, workspaceFetcher, workspace._id]);
   const workspaceLoaderData = workspaceFetcher?.data as WorkspaceLoaderData;
 
   useEffect(() => {

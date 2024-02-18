@@ -14,7 +14,6 @@ import {
 } from '../../../models/project';
 import { Icon } from '../icon';
 import ProjectSettingsModal from '../modals/project-settings-modal';
-import { DEFAULT_ORGANIZATION_ID } from "../../../models/organization"
 
 interface Props {
   project: Project;

@@ -88,7 +88,6 @@ import {
 import { RootLoaderData } from './root';
 import { Child, WorkspaceLoaderData } from './workspace';
 import { WorkspaceSyncDropdown } from '../components/dropdowns/workspace-sync-dropdown';
-import { DEFAULT_ORGANIZATION_ID } from "../../models/organization"
 
 export interface GrpcMessage {
   id: string;

@@ -10,7 +10,6 @@ import { RequestMeta } from '../../models/request-meta';
 import { Settings } from '../../models/settings';
 import { WebSocketRequest } from '../../models/websocket-request';
 import { WorkspaceMeta } from '../../models/workspace-meta';
-import { DEFAULT_ORGANIZATION_ID } from "../../models/organization"
 
 export const useRequestSetter = () => {
   const { projectId, workspaceId } = useParams<{ projectId: string; workspaceId: string }>();

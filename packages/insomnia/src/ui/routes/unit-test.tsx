@@ -23,7 +23,6 @@ import { Button } from '../components/themed-button';
 import { TestRunStatus } from './test-results';
 import TestSuiteRoute from './test-suite';
 import { WorkspaceSyncDropdown } from '../components/dropdowns/workspace-sync-dropdown';
-import { DEFAULT_ORGANIZATION_ID } from "../../models/organization"
 
 interface LoaderData {
   unitTestSuites: UnitTestSuite[];

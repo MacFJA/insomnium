@@ -22,7 +22,6 @@ import { PanelContainer, TabItem, Tabs } from '../base/tabs';
 import { HelpTooltip } from '../help-tooltip';
 import { MarkdownEditor } from '../markdown-editor';
 import { PasswordViewer } from '../viewers/password-viewer';
-import { DEFAULT_ORGANIZATION_ID } from "../../../models/organization"
 const CertificateFields = styled.div({
   display: 'flex',
   flexDirection: 'column',
