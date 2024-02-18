@@ -30,6 +30,7 @@ import { SyncHistoryModal } from '../modals/sync-history-modal';
 import { SyncStagingModal } from '../modals/sync-staging-modal';
 import { Button } from '../themed-button';
 import { Tooltip } from '../tooltip';
+import { DEFAULT_ORGANIZATION_ID } from "../../../models/organization"
 // TODO: handle refetching logic in one place not here in a component
 
 // Refresh dropdown periodically
@@ -78,7 +79,7 @@ export const SyncDropdown: FC<Props> = ({ vcs, workspace, project }) => {
     },
     remoteBackendProjects: [],
   });
-  const { organizationId, projectId } = useParams<{ organizationId: string; projectId: string }>();
+  const { projectId } = useParams<{ projectId: string }>();
   const navigate = useNavigate();
   const {
     activeWorkspaceMeta,
@@ -166,7 +167,7 @@ export const SyncDropdown: FC<Props> = ({ vcs, workspace, project }) => {
     const pulledIntoProject = await pullBackendProject({ vcs, backendProject, remoteProjects });
     if (pulledIntoProject.project._id !== project._id) {
       // If pulled into a different project, reactivate the workspace
-      navigate(`/organization/${organizationId}/project/${projectId}/workspace/${workspace._id}`);
+      navigate(`/organization/${DEFAULT_ORGANIZATION_ID}/project/${projectId}/workspace/${workspace._id}`);
       // logCollectionMovedToProject(workspace, pulledIntoProject.project);
     }
     await refreshVCSAndRefetchRemote();

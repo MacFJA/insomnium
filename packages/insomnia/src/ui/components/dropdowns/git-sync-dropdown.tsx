@@ -31,6 +31,7 @@ import { GitRepositorySettingsModal } from '../modals/git-repository-settings-mo
 import { GitStagingModal } from '../modals/git-staging-modal';
 import { Button } from '../themed-button';
 import { Tooltip } from '../tooltip';
+import { DEFAULT_ORGANIZATION_ID } from "../../../models/organization"
 
 interface Props {
   gitRepository: GitRepository | null;
@@ -39,8 +40,7 @@ interface Props {
 }
 
 export const GitSyncDropdown: FC<Props> = ({ className, gitRepository, isInsomniaSyncEnabled }) => {
-  const { organizationId, projectId, workspaceId } = useParams() as {
-    organizationId: string;
+  const { projectId, workspaceId } = useParams() as {
     projectId: string;
     workspaceId: string;
   };
@@ -73,7 +73,7 @@ export const GitSyncDropdown: FC<Props> = ({ className, gitRepository, isInsomni
     ) {
       console.log('[git:fetcher] Fetching git repo data');
       gitRepoDataFetcher.submit({}, {
-        action: `/organization/${organizationId}/project/${projectId}/workspace/${workspaceId}/git/repo`,
+        action: `/organization/${DEFAULT_ORGANIZATION_ID}/project/${projectId}/workspace/${workspaceId}/git/repo`,
         method: 'post',
       });
     }
@@ -81,7 +81,6 @@ export const GitSyncDropdown: FC<Props> = ({ className, gitRepository, isInsomni
     gitRepoDataFetcher,
     gitRepository?.uri,
     gitRepository?._id,
-    organizationId,
     projectId,
     workspaceId,
   ]);
@@ -93,11 +92,11 @@ export const GitSyncDropdown: FC<Props> = ({ className, gitRepository, isInsomni
     if (shouldFetchGitRepoStatus) {
       console.log('[git:fetcher] Fetching git repo status');
       gitStatusFetcher.submit({}, {
-        action: `/organization/${organizationId}/project/${projectId}/workspace/${workspaceId}/git/status`,
+        action: `/organization/${DEFAULT_ORGANIZATION_ID}/project/${projectId}/workspace/${workspaceId}/git/status`,
         method: 'post',
       });
     }
-  }, [gitStatusFetcher, organizationId, projectId, shouldFetchGitRepoStatus, workspaceId]);
+  }, [gitStatusFetcher, projectId, shouldFetchGitRepoStatus, workspaceId]);
 
   useEffect(() => {
     const errors = [...(gitPushFetcher.data?.errors ?? [])];
@@ -149,7 +148,7 @@ export const GitSyncDropdown: FC<Props> = ({ className, gitRepository, isInsomni
         force: `${force}`,
       },
       {
-        action: `/organization/${organizationId}/project/${projectId}/workspace/${workspaceId}/git/push`,
+        action: `/organization/${DEFAULT_ORGANIZATION_ID}/project/${projectId}/workspace/${workspaceId}/git/push`,
         method: 'post',
       }
     );
@@ -197,7 +196,7 @@ export const GitSyncDropdown: FC<Props> = ({ className, gitRepository, isInsomni
         gitPullFetcher.submit(
           {},
           {
-            action: `/organization/${organizationId}/project/${projectId}/workspace/${workspaceId}/git/pull`,
+            action: `/organization/${DEFAULT_ORGANIZATION_ID}/project/${projectId}/workspace/${workspaceId}/git/pull`,
             method: 'post',
           }
         );
@@ -225,7 +224,7 @@ export const GitSyncDropdown: FC<Props> = ({ className, gitRepository, isInsomni
         gitFetchFetcher.submit(
           {},
           {
-            action: `/organization/${organizationId}/project/${projectId}/workspace/${workspaceId}/git/fetch`,
+            action: `/organization/${DEFAULT_ORGANIZATION_ID}/project/${projectId}/workspace/${workspaceId}/git/fetch`,
             method: 'post',
           }
         );
@@ -237,7 +236,7 @@ export const GitSyncDropdown: FC<Props> = ({ className, gitRepository, isInsomni
     gitFetchFetcher.submit(
       {},
       {
-        action: `/organization/${organizationId}/project/${projectId}/workspace/${workspaceId}/git/fetch`,
+        action: `/organization/${DEFAULT_ORGANIZATION_ID}/project/${projectId}/workspace/${workspaceId}/git/fetch`,
         method: 'post',
       }
     );
@@ -396,7 +395,7 @@ export const GitSyncDropdown: FC<Props> = ({ className, gitRepository, isInsomni
                           branch,
                         },
                         {
-                          action: `/organization/${organizationId}/project/${projectId}/workspace/${workspaceId}/git/branch/checkout`,
+                          action: `/organization/${DEFAULT_ORGANIZATION_ID}/project/${projectId}/workspace/${workspaceId}/git/branch/checkout`,
                           method: 'post',
                         }
                       );

@@ -22,12 +22,13 @@ import { configGenerators, showGenerateConfigModal } from '../modals/generate-co
 import { ImportModal } from '../modals/import-modal';
 import { WorkspaceDuplicateModal } from '../modals/workspace-duplicate-modal';
 import { WorkspaceSettingsModal } from '../modals/workspace-settings-modal';
+import { DEFAULT_ORGANIZATION_ID } from "../../../models/organization"
 
 console.log("[configGenerators] ", configGenerators);
 
 export const WorkspaceDropdown: FC = () => {
-  const { organizationId, projectId, workspaceId } = useParams<{ organizationId: string; projectId: string; workspaceId: string }>();
-  guard(organizationId, 'Expected organizationId');
+  const { projectId, workspaceId } = useParams<{ projectId: string; workspaceId: string }>();
+  guard(DEFAULT_ORGANIZATION_ID, 'Expected organizationId');
   const {
     activeWorkspace,
     activeWorkspaceMeta,
@@ -143,7 +144,7 @@ export const WorkspaceDropdown: FC = () => {
                   fetcher.submit(
                     { name, workspaceId: activeWorkspace._id },
                     {
-                      action: `/organization/${organizationId}/project/${activeWorkspace.parentId}/workspace/update`,
+                      action: `/organization/${DEFAULT_ORGANIZATION_ID}/project/${activeWorkspace.parentId}/workspace/update`,
                       method: 'post',
                       encType: 'application/json',
                     }
@@ -211,7 +212,6 @@ export const WorkspaceDropdown: FC = () => {
           from={{ type: 'file' }}
           projectName={projectName}
           workspaceName={workspaceName}
-          organizationId={organizationId}
           defaultProjectId={projectId}
           defaultWorkspaceId={workspaceId}
         />

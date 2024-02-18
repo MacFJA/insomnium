@@ -26,7 +26,6 @@ import { applyColorScheme } from '../plugins/misc';
 import { guard } from '../utils/guard';
 import { AppLoadingIndicator } from './components/app-loading-indicator';
 import { ErrorRoute } from './routes/error';
-import { shouldOrganizationsRevalidate } from './routes/organization';
 import Root from './routes/root';
 
 const Project = lazy(() => import('./routes/project'));
@@ -45,7 +44,7 @@ document.title = getProductName();
 let locationHistoryEntry = `/organization/${DEFAULT_ORGANIZATION_ID}/project/${DEFAULT_PROJECT_ID}`;
 const prevLocationHistoryEntry = localStorage.getItem('locationHistoryEntry');
 
-if (prevLocationHistoryEntry && matchPath({ path: '/organization/:organizationId', end: false }, prevLocationHistoryEntry)) {
+if (prevLocationHistoryEntry && matchPath({ path: `/organization/${DEFAULT_ORGANIZATION_ID}`, end: false }, prevLocationHistoryEntry)) {
   locationHistoryEntry = prevLocationHistoryEntry;
 }
 

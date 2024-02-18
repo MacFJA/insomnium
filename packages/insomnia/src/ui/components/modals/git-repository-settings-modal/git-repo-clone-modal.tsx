@@ -16,6 +16,7 @@ import { showAlert } from '..';
 import { CustomRepositorySettingsFormGroup } from './custom-repository-settings-form-group';
 import { GitHubRepositorySetupFormGroup } from './github-repository-settings-form-group';
 import { GitLabRepositorySetupFormGroup } from './gitlab-repository-settings-form-group';
+import { DEFAULT_ORGANIZATION_ID } from "../../../../models/organization"
 
 const TabPill = styled.div({
   display: 'flex',
@@ -24,7 +25,7 @@ const TabPill = styled.div({
 });
 
 export const GitRepositoryCloneModal = (props: ModalProps) => {
-  const { organizationId, projectId } = useParams() as { organizationId: string; projectId: string };
+  const { projectId } = useParams() as { projectId: string };
   const modalRef = useRef<ModalHandle>(null);
   const cloneGitRepositoryFetcher = useFetcher();
 
@@ -54,7 +55,7 @@ export const GitRepositoryCloneModal = (props: ModalProps) => {
         ...credentials,
       },
       {
-        action: `/organization/${organizationId}/project/${projectId}/git/clone`,
+        action: `/organization/${DEFAULT_ORGANIZATION_ID}/project/${projectId}/git/clone`,
         method: 'post',
       }
     );

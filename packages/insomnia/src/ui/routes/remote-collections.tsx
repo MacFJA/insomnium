@@ -8,9 +8,10 @@ import { BackendProject } from '../../sync/types';
 import { pullBackendProject } from '../../sync/vcs/pull-backend-project';
 import { getVCS } from '../../sync/vcs/vcs';
 import { guard } from '../../utils/guard';
+import { DEFAULT_ORGANIZATION_ID } from "../../models/organization"
 
 export const pullRemoteCollectionAction: ActionFunction = async ({ request, params }) => {
-  const { organizationId, projectId } = params;
+  const { projectId } = params;
   const formData = await request.formData();
 
   const backendProjectId = formData.get('backendProjectId');
@@ -41,7 +42,7 @@ export const pullRemoteCollectionAction: ActionFunction = async ({ request, para
   const { workspaceId } = await pullBackendProject({ vcs: newVCS, backendProject, remoteProjects });
 
   if (workspaceId) {
-    return redirect(`/organization/${organizationId}/project/${projectId}/workspace/${workspaceId}/debug`);
+    return redirect(`/organization/${DEFAULT_ORGANIZATION_ID}/project/${projectId}/workspace/${workspaceId}/debug`);
   }
 
   return null;

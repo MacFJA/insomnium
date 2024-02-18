@@ -25,14 +25,13 @@ import { guard } from '../../utils/guard';
 
 // Project
 export const createNewProjectAction: ActionFunction = async ({ request, params }) => {
-  const { organizationId } = params;
-  guard(organizationId, 'Organization ID is required');
+  guard(DEFAULT_ORGANIZATION_ID, 'Organization ID is required');
   const formData = await request.formData();
   const name = formData.get('name');
   guard(typeof name === 'string', 'Name is required');
   const project = await models.project.create({ name });
 
-  return redirect(`/organization/${organizationId}/project/${project._id}`);
+  return redirect(`/organization/${DEFAULT_ORGANIZATION_ID}/project/${project._id}`);
 };
 
 export const renameProjectAction: ActionFunction = async ({
@@ -62,8 +61,8 @@ export const renameProjectAction: ActionFunction = async ({
 };
 
 export const deleteProjectAction: ActionFunction = async ({ params }) => {
-  const { organizationId, projectId } = params;
-  guard(organizationId, 'Organization ID is required');
+  const { projectId } = params;
+  guard(DEFAULT_ORGANIZATION_ID, 'Organization ID is required');
   guard(projectId, 'Project ID is required');
   const project = await models.project.getById(projectId);
   guard(project, 'Project not found');
@@ -79,8 +78,8 @@ export const createNewWorkspaceAction: ActionFunction = async ({
   params,
   request,
 }) => {
-  const { organizationId, projectId } = params;
-  guard(organizationId, 'Organization ID is required');
+  const { projectId } = params;
+  guard(DEFAULT_ORGANIZATION_ID, 'Organization ID is required');
   guard(projectId, 'Project ID is required');
 
   const project = await models.project.getById(projectId);
@@ -126,7 +125,7 @@ export const createNewWorkspaceAction: ActionFunction = async ({
   // }
 
   return redirect(
-    `/organization/${organizationId}/project/${projectId}/workspace/${workspace._id}/${workspace.scope === 'collection' ? ACTIVITY_DEBUG : ACTIVITY_SPEC
+    `/organization/${DEFAULT_ORGANIZATION_ID}/project/${projectId}/workspace/${workspace._id}/${workspace.scope === 'collection' ? ACTIVITY_DEBUG : ACTIVITY_SPEC
     }`
   );
 };
@@ -135,7 +134,7 @@ export const deleteWorkspaceAction: ActionFunction = async ({
   params,
   request,
 }) => {
-  const { organizationId, projectId } = params;
+  const { projectId } = params;
   guard(projectId, 'projectId is required');
 
   const project = await models.project.getById(projectId);
@@ -163,13 +162,12 @@ export const deleteWorkspaceAction: ActionFunction = async ({
   } catch (err) {
     console.warn('Failed to remove project from VCS', err);
   }
-  console.log(`redirecting to /organization/${organizationId}/project/${projectId}`);
-  return redirect(`/organization/${organizationId}/project/${projectId}`);
+  console.log(`redirecting to /organization/${DEFAULT_ORGANIZATION_ID}/project/${projectId}`);
+  return redirect(`/organization/${DEFAULT_ORGANIZATION_ID}/project/${projectId}`);
 };
 
 export const duplicateWorkspaceAction: ActionFunction = async ({ request, params }) => {
-  const { organizationId } = params;
-  guard(organizationId, 'Organization Id is required');
+  guard(DEFAULT_ORGANIZATION_ID, 'Organization Id is required');
   const formData = await request.formData();
   const projectId = formData.get('projectId');
   guard(typeof projectId === 'string', 'Project ID is required');
@@ -223,7 +221,7 @@ export const duplicateWorkspaceAction: ActionFunction = async ({ request, params
   }
 
   return redirect(
-    `/organization/${organizationId}/project/${projectId}/workspace/${newWorkspace._id}/${newWorkspace.scope === 'collection' ? ACTIVITY_DEBUG : ACTIVITY_SPEC
+    `/organization/${DEFAULT_ORGANIZATION_ID}/project/${projectId}/workspace/${newWorkspace._id}/${newWorkspace.scope === 'collection' ? ACTIVITY_DEBUG : ACTIVITY_SPEC
     }`
   );
 };
@@ -262,7 +260,7 @@ export const createNewTestSuiteAction: ActionFunction = async ({
   request,
   params,
 }) => {
-  const { organizationId, workspaceId, projectId } = params;
+  const { workspaceId, projectId } = params;
   guard(typeof workspaceId === 'string', 'Workspace ID is required');
   const formData = await request.formData();
   const name = formData.get('name');
@@ -273,11 +271,11 @@ export const createNewTestSuiteAction: ActionFunction = async ({
     name,
   });
 
-  return redirect(`/organization/${organizationId}/project/${projectId}/workspace/${workspaceId}/test/test-suite/${unitTestSuite._id}`);
+  return redirect(`/organization/${DEFAULT_ORGANIZATION_ID}/project/${projectId}/workspace/${workspaceId}/test/test-suite/${unitTestSuite._id}`);
 };
 
 export const deleteTestSuiteAction: ActionFunction = async ({ params }) => {
-  const { organizationId, workspaceId, projectId, testSuiteId } = params;
+  const { workspaceId, projectId, testSuiteId } = params;
   guard(typeof testSuiteId === 'string', 'Test Suite ID is required');
   guard(typeof workspaceId === 'string', 'Workspace ID is required');
   guard(typeof projectId === 'string', 'Project ID is required');
@@ -288,13 +286,13 @@ export const deleteTestSuiteAction: ActionFunction = async ({ params }) => {
 
   await models.unitTestSuite.remove(unitTestSuite);
 
-  return redirect(`/organization/${organizationId}/project/${projectId}/workspace/${workspaceId}/test`);
+  return redirect(`/organization/${DEFAULT_ORGANIZATION_ID}/project/${projectId}/workspace/${workspaceId}/test`);
 };
 
 export const runAllTestsAction: ActionFunction = async ({
   params,
 }) => {
-  const { organizationId, projectId, workspaceId, testSuiteId } = params;
+  const { projectId, workspaceId, testSuiteId } = params;
   guard(typeof projectId === 'string', 'Project ID is required');
   guard(typeof workspaceId === 'string', 'Workspace ID is required');
   guard(typeof testSuiteId === 'string', 'Test Suite ID is required');
@@ -323,7 +321,7 @@ export const runAllTestsAction: ActionFunction = async ({
     parentId: workspaceId,
   });
 
-  return redirect(`/organization/${organizationId}/project/${projectId}/workspace/${workspaceId}/test/test-suite/${testSuiteId}/test-result/${testResult._id}`);
+  return redirect(`/organization/${DEFAULT_ORGANIZATION_ID}/project/${projectId}/workspace/${workspaceId}/test/test-suite/${testSuiteId}/test-result/${testResult._id}`);
 };
 
 export const renameTestSuiteAction: ActionFunction = async ({ request, params }) => {
@@ -406,7 +404,7 @@ export const updateTestAction: ActionFunction = async ({ request, params }) => {
 };
 
 export const runTestAction: ActionFunction = async ({ params }) => {
-  const { organizationId, projectId, workspaceId, testSuiteId, testId } = params;
+  const { projectId, workspaceId, testSuiteId, testId } = params;
   guard(typeof testId === 'string', 'Test ID is required');
 
   const unitTest = await database.getWhere<UnitTest>(models.unitTest.type, {
@@ -432,7 +430,7 @@ export const runTestAction: ActionFunction = async ({ params }) => {
     parentId: unitTest.parentId,
   });
 
-  return redirect(`/organization/${organizationId}/project/${projectId}/workspace/${workspaceId}/test/test-suite/${testSuiteId}/test-result/${testResult._id}`);
+  return redirect(`/organization/${DEFAULT_ORGANIZATION_ID}/project/${projectId}/workspace/${workspaceId}/test/test-suite/${testSuiteId}/test-result/${testResult._id}`);
 };
 
 // Api Spec
@@ -464,7 +462,7 @@ export const updateApiSpecAction: ActionFunction = async ({
 export const generateCollectionFromApiSpecAction: ActionFunction = async ({
   params,
 }) => {
-  const { organizationId, projectId, workspaceId } = params;
+  const { projectId, workspaceId } = params;
 
   guard(typeof projectId === 'string', 'Project ID is required');
   guard(typeof workspaceId === 'string', 'Workspace ID is required');
@@ -500,13 +498,13 @@ export const generateCollectionFromApiSpecAction: ActionFunction = async ({
     workspaceId,
   });
 
-  return redirect(`/organization/${organizationId}/project/${projectId}/workspace/${workspaceId}/${ACTIVITY_DEBUG}`);
+  return redirect(`/organization/${DEFAULT_ORGANIZATION_ID}/project/${projectId}/workspace/${workspaceId}/${ACTIVITY_DEBUG}`);
 };
 
 export const generateCollectionAndTestsAction: ActionFunction = async ({ params }) => {
-  const { organizationId, projectId, workspaceId } = params;
+  const { projectId, workspaceId } = params;
 
-  guard(typeof organizationId === 'string', 'Organization ID is required');
+  guard(typeof DEFAULT_ORGANIZATION_ID === 'string', 'Organization ID is required');
   guard(typeof projectId === 'string', 'Project ID is required');
   guard(typeof workspaceId === 'string', 'Workspace ID is required');
 
@@ -642,9 +640,9 @@ export const generateCollectionAndTestsAction: ActionFunction = async ({ params 
 };
 
 export const generateTestsAction: ActionFunction = async ({ params }) => {
-  const { organizationId, projectId, workspaceId } = params;
+  const { projectId, workspaceId } = params;
 
-  guard(typeof organizationId === 'string', 'Organization ID is required');
+  guard(typeof DEFAULT_ORGANIZATION_ID === 'string', 'Organization ID is required');
   guard(typeof projectId === 'string', 'Project ID is required');
   guard(typeof workspaceId === 'string', 'Workspace ID is required');
 
@@ -726,7 +724,7 @@ export const accessAIApiAction: ActionFunction = async ({ params }) => {
 
   throw new Error("accesAI is disabled");
 
-  // const { organizationId, projectId, workspaceId } = params;
+  // const { projectId, workspaceId } = params;
 
   // guard(typeof organizationId === 'string', 'Organization ID is required');
   // guard(typeof projectId === 'string', 'Project ID is required');

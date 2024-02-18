@@ -5,15 +5,15 @@ import * as models from '../../models';
 import { DEFAULT_PROJECT_ID } from '../../models/project';
 import { guard } from '../../utils/guard';
 import { ImportResourcesActionResult } from './import';
+import { DEFAULT_ORGANIZATION_ID } from "../../models/organization"
 
 export const importResourcesAction: ActionFunction = async ({ request }): Promise<ImportResourcesActionResult> => {
   const formData = await request.formData();
 
-  const organizationId = formData.get('organizationId');
   let projectId = formData.get('projectId');
   const workspaceId = formData.get('workspaceId');
 
-  guard(typeof organizationId === 'string', 'OrganizationId is required.');
+  guard(typeof DEFAULT_ORGANIZATION_ID === 'string', 'OrganizationId is required.');
   // when importing through insomnia://app/import, projectId is not provided
   if (typeof projectId !== 'string' || !projectId) {
     projectId = DEFAULT_PROJECT_ID;

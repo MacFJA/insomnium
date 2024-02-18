@@ -14,13 +14,13 @@ import {
 } from '../../../models/project';
 import { Icon } from '../icon';
 import ProjectSettingsModal from '../modals/project-settings-modal';
+import { DEFAULT_ORGANIZATION_ID } from "../../../models/organization"
 
 interface Props {
   project: Project;
-  organizationId: string;
 }
 
-export const ProjectDropdown: FC<Props> = ({ project, organizationId }) => {
+export const ProjectDropdown: FC<Props> = ({ project }) => {
   const [isProjectSettingsModalOpen, setIsProjectSettingsModalOpen] =
     useState(false);
   const deleteProjectFetcher = useFetcher();
@@ -46,7 +46,7 @@ export const ProjectDropdown: FC<Props> = ({ project, organizationId }) => {
           {},
           {
             method: 'post',
-            action: `/organization/${organizationId}/project/${projectId}/delete`,
+            action: `/organization/${DEFAULT_ORGANIZATION_ID}/project/${projectId}/delete`,
           }
         ),
     },

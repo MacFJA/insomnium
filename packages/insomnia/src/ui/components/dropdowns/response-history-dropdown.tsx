@@ -19,6 +19,7 @@ import { StatusTag } from '../tags/status-tag';
 import { TimeTag } from '../tags/time-tag';
 import { URLTag } from '../tags/url-tag';
 import { TimeFromNow } from '../time-from-now';
+import { DEFAULT_ORGANIZATION_ID } from "../../../models/organization"
 
 export const ResponseHistoryDropdown = ({
   activeResponse,
@@ -42,7 +43,7 @@ export const ResponseHistoryDropdown = ({
     other: [],
   };
 
-  const { organizationId, projectId, workspaceId } = useParams<{ organizationId: string; projectId: string; workspaceId: string }>();
+  const { projectId, workspaceId } = useParams<{ projectId: string; workspaceId: string }>();
   const fetcher = useFetcher();
 
   const handleSetActiveResponse = useCallback(async (requestId: string, activeResponse: Response | WebSocketResponse) => {
@@ -62,11 +63,11 @@ export const ResponseHistoryDropdown = ({
       window.main.webSocket.closeAll();
     }
     fetcher.submit({}, {
-      action: `/organization/${organizationId}/project/${projectId}/workspace/${workspaceId}/debug/request/${requestId}/response/delete-all`,
+      action: `/organization/${DEFAULT_ORGANIZATION_ID}/project/${projectId}/workspace/${workspaceId}/debug/request/${requestId}/response/delete-all`,
       method: 'post',
       encType: 'application/json',
     });
-  }, [activeResponse, fetcher, organizationId, projectId, requestId, workspaceId]);
+  }, [activeResponse, fetcher, projectId, requestId, workspaceId]);
 
   const handleDeleteResponse = useCallback(async () => {
     if (activeResponse) {
@@ -75,11 +76,11 @@ export const ResponseHistoryDropdown = ({
       }
     }
     fetcher.submit({ responseId: activeResponse._id }, {
-      action: `/organization/${organizationId}/project/${projectId}/workspace/${workspaceId}/debug/request/${requestId}/response/delete`,
+      action: `/organization/${DEFAULT_ORGANIZATION_ID}/project/${projectId}/workspace/${workspaceId}/debug/request/${requestId}/response/delete`,
       method: 'post',
       encType: 'application/json',
     });
-  }, [activeResponse, fetcher, requestId, organizationId, projectId, workspaceId]);
+  }, [activeResponse, fetcher, requestId, projectId, workspaceId]);
 
   responses.forEach((response: Response | WebSocketResponse) => {
     const responseTime = new Date(response.created);

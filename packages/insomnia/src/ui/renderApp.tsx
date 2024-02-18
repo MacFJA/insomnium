@@ -11,6 +11,7 @@ import { dummyStartingWorkspace, importPure } from '../common/import';
 import { Workspace } from '../models/workspace';
 import { BaseModel } from '../models';
 import { getProductName } from '../common/constants';
+import { DEFAULT_ORGANIZATION_ID } from "../models/organization"
 
 export async function renderApp() {
 
@@ -35,7 +36,7 @@ export async function renderApp() {
     const e = (newObj.resources?.[0]?.resources as BaseModel[]).find(a => a.type === "Environment");
     if (w && r && e) {
       wId = w._id;
-      beginningPathForFirstTimeUser = `/organization/org_default-project/project/proj_default-project/workspace/${w._id}/debug/request/${r._id}`;
+      beginningPathForFirstTimeUser = `/organization/${DEFAULT_ORGANIZATION_ID}/project/proj_default-project/workspace/${w._id}/debug/request/${r._id}`;
 
       const defaultProject = await models.project.getById('proj_default-project');
 

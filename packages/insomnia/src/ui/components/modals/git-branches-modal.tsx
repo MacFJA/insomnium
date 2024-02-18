@@ -11,6 +11,7 @@ import { ModalFooter } from '../base/modal-footer';
 import { ModalHeader } from '../base/modal-header';
 import { PromptButton } from '../base/prompt-button';
 import { showAlert } from '.';
+import { DEFAULT_ORGANIZATION_ID } from "../../../models/organization"
 
 type Props = ModalProps & {
   activeBranch: string;
@@ -27,7 +28,7 @@ export const GitBranchesModal: FC<Props> = (({
   onHide,
   activeBranch,
 }) => {
-  const { organizationId, projectId, workspaceId } = useParams() as { organizationId: string; projectId: string; workspaceId: string};
+  const { projectId, workspaceId } = useParams() as { projectId: string; workspaceId: string};
   const modalRef = useRef<ModalHandle>(null);
 
   useEffect(() => {
@@ -49,9 +50,9 @@ export const GitBranchesModal: FC<Props> = (({
 
   useEffect(() => {
     if (branchesFetcher.state === 'idle' && !branchesFetcher.data) {
-      branchesFetcher.load(`/organization/${organizationId}/project/${projectId}/workspace/${workspaceId}/git/branches`);
+      branchesFetcher.load(`/organization/${DEFAULT_ORGANIZATION_ID}/project/${projectId}/workspace/${workspaceId}/git/branches`);
     }
-  }, [branchesFetcher, organizationId, projectId, workspaceId]);
+  }, [branchesFetcher, projectId, workspaceId]);
 
   useEffect(() => {
     if (newBranchFetcher.data?.errors?.length) {
@@ -69,7 +70,7 @@ export const GitBranchesModal: FC<Props> = (({
         <ModalBody className="pad">
           <newBranchFetcher.Form
             method="post"
-            action={`/organization/${organizationId}/project/${projectId}/workspace/${workspaceId}/git/branch/new`}
+            action={`/organization/${DEFAULT_ORGANIZATION_ID}/project/${projectId}/workspace/${workspaceId}/git/branch/new`}
           >
             <div className="form-row">
               <div className="form-control form-control--outlined">
@@ -125,7 +126,7 @@ export const GitBranchesModal: FC<Props> = (({
                               mergeBranchFetcher.submit({
                                 branch,
                               }, {
-                                action: `/organization/${organizationId}/project/${projectId}/workspace/${workspaceId}/git/branch/merge`,
+                                action: `/organization/${DEFAULT_ORGANIZATION_ID}/project/${projectId}/workspace/${workspaceId}/git/branch/merge`,
                                 method: 'post',
                               });
                             }}
@@ -139,7 +140,7 @@ export const GitBranchesModal: FC<Props> = (({
                               deleteBranchFetcher.submit({
                                 branch,
                               }, {
-                                action: `/organization/${organizationId}/project/${projectId}/workspace/${workspaceId}/git/branch/delete`,
+                                action: `/organization/${DEFAULT_ORGANIZATION_ID}/project/${projectId}/workspace/${workspaceId}/git/branch/delete`,
                                 method: 'post',
                               });
                             }}
@@ -152,7 +153,7 @@ export const GitBranchesModal: FC<Props> = (({
                               checkoutBranchFetcher.submit({
                                 branch,
                               }, {
-                                action: `/organization/${organizationId}/project/${projectId}/workspace/${workspaceId}/git/branch/checkout`,
+                                action: `/organization/${DEFAULT_ORGANIZATION_ID}/project/${projectId}/workspace/${workspaceId}/git/branch/checkout`,
                                 method: 'post',
                               });
                             }}
@@ -195,7 +196,7 @@ export const GitBranchesModal: FC<Props> = (({
                             checkoutBranchFetcher.submit({
                               branch,
                             }, {
-                              action: `/organization/${organizationId}/project/${projectId}/workspace/${workspaceId}/git/branch/checkout`,
+                              action: `/organization/${DEFAULT_ORGANIZATION_ID}/project/${projectId}/workspace/${workspaceId}/git/branch/checkout`,
                               method: 'post',
                             });
                           }}

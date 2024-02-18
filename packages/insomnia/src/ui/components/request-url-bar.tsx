@@ -24,6 +24,7 @@ import { MethodDropdown } from './dropdowns/method-dropdown';
 import { createKeybindingsHandler, useDocBodyKeyboardShortcuts } from './keydown-binder';
 import { GenerateCodeModal } from './modals/generate-code-modal';
 import { showAlert, showModal, showPrompt } from './modals/index';
+import { DEFAULT_ORGANIZATION_ID } from "../../models/organization"
 
 const StyledDropdownButton = styled(DropdownButton)({
   '&:hover:not(:disabled)': {
@@ -87,11 +88,11 @@ export const RequestUrlBar = forwardRef<RequestUrlBarHandle, Props>(({
       setLoading(false);
     }
   }, [fetcher.state, setLoading]);
-  const { organizationId, projectId, workspaceId, requestId } = useParams() as { organizationId: string; projectId: string; workspaceId: string; requestId: string };
+  const { projectId, workspaceId, requestId } = useParams() as { projectId: string; workspaceId: string; requestId: string };
   const connect = (connectParams: ConnectActionParams) => {
     fetcher.submit(JSON.stringify(connectParams),
       {
-        action: `/organization/${organizationId}/project/${projectId}/workspace/${workspaceId}/debug/request/${requestId}/connect`,
+        action: `/organization/${DEFAULT_ORGANIZATION_ID}/project/${projectId}/workspace/${workspaceId}/debug/request/${requestId}/connect`,
         method: 'post',
         encType: 'application/json',
       });
@@ -99,7 +100,7 @@ export const RequestUrlBar = forwardRef<RequestUrlBarHandle, Props>(({
   const send = (sendParams: SendActionParams) => {
     fetcher.submit(JSON.stringify(sendParams),
       {
-        action: `/organization/${organizationId}/project/${projectId}/workspace/${workspaceId}/debug/request/${requestId}/send`,
+        action: `/organization/${DEFAULT_ORGANIZATION_ID}/project/${projectId}/workspace/${workspaceId}/debug/request/${requestId}/send`,
         method: 'post',
         encType: 'application/json',
       });

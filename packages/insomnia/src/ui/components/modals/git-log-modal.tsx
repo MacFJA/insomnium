@@ -9,14 +9,14 @@ import { ModalFooter } from '../base/modal-footer';
 import { ModalHeader } from '../base/modal-header';
 import { TimeFromNow } from '../time-from-now';
 import { Tooltip } from '../tooltip';
+import { DEFAULT_ORGANIZATION_ID } from "../../../models/organization"
 
 type Props = ModalProps & {
   branch: string;
 };
 
 export const GitLogModal: FC<Props> = ({ branch, onHide }) => {
-  const { organizationId, projectId, workspaceId } = useParams() as {
-    organizationId: string;
+  const { projectId, workspaceId } = useParams() as {
     projectId: string;
     workspaceId: string;
   };
@@ -26,9 +26,9 @@ export const GitLogModal: FC<Props> = ({ branch, onHide }) => {
   const isLoading = gitLogFetcher.state !== 'idle';
   useEffect(() => {
     if (gitLogFetcher.state === 'idle' && !gitLogFetcher.data) {
-      gitLogFetcher.load(`/organization/${organizationId}/project/${projectId}/workspace/${workspaceId}/git/log`);
+      gitLogFetcher.load(`/organization/${DEFAULT_ORGANIZATION_ID}/project/${projectId}/workspace/${workspaceId}/git/log`);
     }
-  }, [organizationId, projectId, workspaceId, gitLogFetcher]);
+  }, [projectId, workspaceId, gitLogFetcher]);
   useEffect(() => {
     modalRef.current?.show();
   }, []);

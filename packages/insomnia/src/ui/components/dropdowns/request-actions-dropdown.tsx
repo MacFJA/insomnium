@@ -26,6 +26,7 @@ import { showError, showModal, showPrompt } from '../modals';
 import { AlertModal } from '../modals/alert-modal';
 import { GenerateCodeModal } from '../modals/generate-code-modal';
 import { RequestSettingsModal } from '../modals/request-settings-modal';
+import { DEFAULT_ORGANIZATION_ID } from "../../../models/organization"
 
 interface Props extends Omit<DropdownProps, 'children'> {
   activeEnvironment: Environment;
@@ -50,7 +51,7 @@ export const RequestActionsDropdown = ({
   const [actionPlugins, setActionPlugins] = useState<RequestAction[]>([]);
   const [loadingActions, setLoadingActions] = useState<Record<string, boolean>>({});
   const requestFetcher = useFetcher();
-  const { organizationId, projectId, workspaceId } = useParams() as { organizationId: string; projectId: string; workspaceId: string };
+  const { projectId, workspaceId } = useParams() as { projectId: string; workspaceId: string };
 
   const [isSettingsModalOpen, setIsSettingsModalOpen] = useState(false);
 
@@ -72,7 +73,7 @@ export const RequestActionsDropdown = ({
       selectText: true,
       onComplete: (name: string) => requestFetcher.submit({ name },
         {
-          action: `/organization/${organizationId}/project/${projectId}/workspace/${workspaceId}/debug/request/${request?._id}/duplicate`,
+          action: `/organization/${DEFAULT_ORGANIZATION_ID}/project/${projectId}/workspace/${workspaceId}/debug/request/${request?._id}/duplicate`,
           method: 'post',
           encType: 'application/json',
         }),
@@ -144,7 +145,7 @@ export const RequestActionsDropdown = ({
     incrementDeletedRequests();
     requestFetcher.submit({ id: request._id },
       {
-        action: `/organization/${organizationId}/project/${projectId}/workspace/${workspaceId}/debug/request/delete`,
+        action: `/organization/${DEFAULT_ORGANIZATION_ID}/project/${projectId}/workspace/${workspaceId}/debug/request/delete`,
         method: 'post',
       });
   };

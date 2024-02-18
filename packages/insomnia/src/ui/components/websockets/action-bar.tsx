@@ -10,6 +10,7 @@ import { ConnectActionParams } from '../../routes/request';
 import { OneLineEditor, OneLineEditorHandle } from '../codemirror/one-line-editor';
 import { createKeybindingsHandler, useDocBodyKeyboardShortcuts } from '../keydown-binder';
 import { DisconnectButton } from './disconnect-button';
+import { DEFAULT_ORGANIZATION_ID } from "../../../models/organization"
 
 const Button = styled.button<{ warning?: boolean }>(({ warning }) => ({
   paddingRight: 'var(--padding-md)',
@@ -73,11 +74,11 @@ export const WebSocketActionBar: FC<ActionBarProps> = ({ request, environmentId,
   }, []);
 
   const fetcher = useFetcher();
-  const { organizationId, projectId, workspaceId, requestId } = useParams() as { organizationId: string; projectId: string; workspaceId: string; requestId: string };
+  const { projectId, workspaceId, requestId } = useParams() as { projectId: string; workspaceId: string; requestId: string };
   const connect = (connectParams: ConnectActionParams) => {
     fetcher.submit(JSON.stringify(connectParams),
       {
-        action: `/organization/${organizationId}/project/${projectId}/workspace/${workspaceId}/debug/request/${requestId}/connect`,
+        action: `/organization/${DEFAULT_ORGANIZATION_ID}/project/${projectId}/workspace/${workspaceId}/debug/request/${requestId}/connect`,
         method: 'post',
         encType: 'application/json',
       });

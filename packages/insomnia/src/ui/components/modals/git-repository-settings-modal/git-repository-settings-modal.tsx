@@ -17,6 +17,7 @@ import { showAlert } from '..';
 import { CustomRepositorySettingsFormGroup } from './custom-repository-settings-form-group';
 import { GitHubRepositorySetupFormGroup } from './github-repository-settings-form-group';
 import { GitLabRepositorySetupFormGroup } from './gitlab-repository-settings-form-group';
+import { DEFAULT_ORGANIZATION_ID } from "../../../../models/organization"
 
 const TabPill = styled.div({
   display: 'flex',
@@ -27,7 +28,7 @@ const TabPill = styled.div({
 export const GitRepositorySettingsModal = (props: ModalProps & {
   gitRepository?: GitRepository;
 }) => {
-  const { organizationId, projectId, workspaceId } = useParams() as { organizationId: string; projectId: string; workspaceId: string };
+  const { projectId, workspaceId } = useParams() as { projectId: string; workspaceId: string };
   const { gitRepository } = props;
   const modalRef = useRef<ModalHandle>(null);
   const updateGitRepositoryFetcher = useFetcher();
@@ -59,7 +60,7 @@ export const GitRepositorySettingsModal = (props: ModalProps & {
         ...credentials,
       },
       {
-        action: `/organization/${organizationId}/project/${projectId}/workspace/${workspaceId}/git/update`,
+        action: `/organization/${DEFAULT_ORGANIZATION_ID}/project/${projectId}/workspace/${workspaceId}/git/update`,
         method: 'post',
       }
     );
@@ -118,7 +119,7 @@ export const GitRepositorySettingsModal = (props: ModalProps & {
               disabled={!gitRepository}
               onClick={() => {
                 deleteGitRepositoryFetcher.submit({}, {
-                  action: `/organization/${organizationId}/project/${projectId}/workspace/${workspaceId}/git/reset`,
+                  action: `/organization/${DEFAULT_ORGANIZATION_ID}/project/${projectId}/workspace/${workspaceId}/git/reset`,
                   method: 'post',
                 });
               }}

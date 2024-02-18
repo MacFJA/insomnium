@@ -7,9 +7,6 @@ import {
   Button,
   Item,
   Link,
-  Menu,
-  MenuTrigger,
-  Popover,
   Tooltip,
   TooltipTrigger,
 } from 'react-aria-components';
@@ -23,7 +20,6 @@ import {
   useParams,
   useRouteLoaderData,
 } from 'react-router-dom';
-import llama from "../../../src/ui/components/assets/llama.jpg";
 
 /**** ><> ↑ --------- Imports */
 
@@ -63,7 +59,7 @@ import { useSettingsPatcher } from '../hooks/use-request';
 import Modals from './modals';
 
 import { WorkspaceLoaderData } from './workspace';
-import { defaultOrganization } from '../../models/organization';
+import { DEFAULT_ORGANIZATION_ID } from "../../models/organization"
 
 /**** ><> ↑ --------- Hooks and Containers */
 export interface RootLoaderData {
@@ -83,7 +79,6 @@ const Root = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const { settings } = useLoaderData() as RootLoaderData;
-  const organizations = [defaultOrganization];
 
   const workspaceData = useRouteLoaderData(
     ':workspaceId'
@@ -231,8 +226,7 @@ const Root = () => {
     );
   }, [patchSettings]);
 
-  const { organizationId, projectId, workspaceId } = useParams() as {
-    organizationId: string;
+  const { projectId, workspaceId } = useParams() as {
     projectId?: string;
     workspaceId?: string;
   };
@@ -245,7 +239,7 @@ const Root = () => {
           node: (
             <Link data-testid="project">
               <NavLink
-                to={`/organization/${organizationId}/project/${workspaceData.activeProject._id}`}
+                to={`/organization/${DEFAULT_ORGANIZATION_ID}/project/${workspaceData.activeProject._id}`}
               >
                 {workspaceData.activeProject.name}
               </NavLink>
@@ -270,11 +264,10 @@ const Root = () => {
             <ImportModal
               onHide={() => setImportUri('')}
               projectName="Insomnium"
-              organizationId={organizationId}
               from={{ type: 'uri', defaultValue: importUri }}
             />
           )}
-          <div className="w-full h-full divide-x divide-solid divide-y divide-[--hl-md] grid-template-app-layout grid relative bg-[--color-bg]">
+          <div className="w-full h-full divide-solid divide-y divide-[--hl-md] grid-template-app-layout grid relative bg-[--color-bg]">
             <header className="[grid-area:Header] grid grid-cols-3 items-center">
               <div className="flex items-center">
                 <div className="flex w-[50px] py-2">
@@ -297,7 +290,7 @@ const Root = () => {
                         {['spec', 'debug', 'test'].map(item => (
                           <NavLink
                             key={item}
-                            to={`/organization/${organizationId}/project/${projectId}/workspace/${workspaceId}/${item}`}
+                            to={`/organization/${DEFAULT_ORGANIZATION_ID}/project/${projectId}/workspace/${workspaceId}/${item}`}
                             className={({ isActive }) =>
                               `${
                                 isActive
@@ -317,76 +310,6 @@ const Root = () => {
 
               {/* /**** ><> ↑ --------- Root Component */}
             </header>
-            <div className="[grid-area:Navbar] overflow-hidden">
-              <nav className="flex flex-col items-center place-content-stretch gap-[--padding-md] w-full h-full overflow-y-auto py-[--padding-md]">
-              <TooltipTrigger key={organizations[0]._id}>
-                    <Link>
-                      <NavLink
-                        className={({ isActive }) =>
-                          `select-none text-[--color-font-surprise] flex-shrink-0 hover:no-underline transition-all duration-150 bg-gradient-to-br box-border from-[#4000BF] to-[#154B62] p-[--padding-sm] font-bold outline-[3px] rounded-md w-[28px] h-[28px] flex items-center justify-center active:outline overflow-hidden outline-offset-[3px] outline ${
-                            isActive
-                              ? 'outline-[--color-font]'
-                              : 'outline-transparent focus:outline-[--hl-md] hover:outline-[--hl-md]'
-                          }`
-                        }
-
-                        to={(() => {
-
-                      const currentLocation = location.pathname;
-
-                      if (!currentLocation.includes('organization')) {
-                        // jump to the previous requester location
-                        // if coming from none requester tab
-                        const prevLocationHistoryEntry = localStorage.getItem('requester_locationHistoryEntry');
-
-                        if (prevLocationHistoryEntry) {
- return prevLocationHistoryEntry;
-}
-                      }
-
-                      return `/organization/${organizations[0]._id}`;
-
-                        })()}
-                      >
-
-                        <Icon icon="home" />
-                      </NavLink>
-                    </Link>
-                    <Tooltip
-                      placement="right"
-                      offset={8}
-                      className="border select-none text-sm min-w-max border-solid border-[--hl-sm] shadow-lg bg-[--color-bg] text-[--color-font] px-4 py-2 rounded-md overflow-y-auto max-h-[85vh] focus:outline-none"
-                    >
-                  <span>{organizations[0].name}</span>
-                    </Tooltip>
-                  </TooltipTrigger>
-
-              {/* <TooltipTrigger>
-                <Link>
-                  <NavLink
-                    className={({ isActive }) =>
-                      `select-none text-[--color-font-surprise] flex-shrink-0 hover:no-underline transition-all duration-150 bg-gradient-to-br box-border from-[#4000BF] to-[#154B62]  font-bold  rounded-md w-[28px] h-[28px] flex items-center justify-center active:outline overflow-hidden outline-offset-[3px] outline ${isActive
-                        ? 'outline-[--color-font]'
-                        : 'outline-transparent focus:outline-[--hl-md] hover:outline-[--hl-md]'
-                      }`
-                    }
-                    to={`/llm`}
-                  >
-
-                    <img src={llama} />
-                  </NavLink>
-                </Link>
-                <Tooltip
-                  placement="right"
-                  offset={8}
-                  className="border select-none text-sm min-w-max border-solid border-[--hl-sm] shadow-lg bg-[--color-bg] text-[--color-font] px-4 py-2 rounded-md overflow-y-auto max-h-[85vh] focus:outline-none"
-                >
-                  <span>Large Language Models</span>
-                </Tooltip>
-              </TooltipTrigger> */}
-              </nav>
-            </div>
-            {/* /**** ><> ↑ --------- Navbar */}
             <Outlet />
             <div className="relative [grid-area:Statusbar] flex items-center justify-between overflow-hidden">
               <TooltipTrigger>

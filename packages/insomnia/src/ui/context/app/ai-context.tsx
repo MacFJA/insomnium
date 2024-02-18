@@ -1,6 +1,7 @@
 import React, { createContext, FC, PropsWithChildren, useContext, useEffect } from 'react';
 import { useFetcher, useFetchers, useParams } from 'react-router-dom';
 import { usePrevious } from 'react-use';
+import { DEFAULT_ORGANIZATION_ID } from "../../../models/organization"
 
 const AIContext = createContext({
   generating: false,
@@ -18,11 +19,9 @@ const AIContext = createContext({
 
 export const AIProvider: FC<PropsWithChildren> = ({ children }) => {
   const {
-    organizationId,
     projectId,
     workspaceId,
   } = useParams() as {
-    organizationId: string;
     projectId: string;
     workspaceId: string;
   };
@@ -51,10 +50,10 @@ export const AIProvider: FC<PropsWithChildren> = ({ children }) => {
     if (fetcherHasNotRun || projectIdHasChanged) {
       aiAccessFetcher.submit({}, {
         method: 'post',
-        action: `/organization/${organizationId}/project/${projectId}/workspace/${workspaceId}/ai/access`,
+        action: `/organization/${DEFAULT_ORGANIZATION_ID}/project/${projectId}/workspace/${workspaceId}/ai/access`,
       });
     }
-  }, [aiAccessFetcher, organizationId, projectId, workspaceId, loggedIn, prevProjectId]);
+  }, [aiAccessFetcher, projectId, workspaceId, loggedIn, prevProjectId]);
 
   const isAIEnabled = aiAccessFetcher.data?.enabled ?? false;
 
@@ -94,13 +93,13 @@ export const AIProvider: FC<PropsWithChildren> = ({ children }) => {
         generateTests: () => {
           aiGenerateTestsFetcher.submit({}, {
             method: 'post',
-            action: `/organization/${organizationId}/project/${projectId}/workspace/${workspaceId}/ai/generate/tests`,
+            action: `/organization/${DEFAULT_ORGANIZATION_ID}/project/${projectId}/workspace/${workspaceId}/ai/generate/tests`,
           });
         },
         generateTestsFromSpec: () => {
           aiGenerateTestsFromSpecFetcher.submit({}, {
             method: 'post',
-            action: `/organization/${organizationId}/project/${projectId}/workspace/${workspaceId}/ai/generate/collection-and-tests`,
+            action: `/organization/${DEFAULT_ORGANIZATION_ID}/project/${projectId}/workspace/${workspaceId}/ai/generate/collection-and-tests`,
           });
         },
         access: {

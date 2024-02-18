@@ -9,6 +9,7 @@ import { ModalBody } from '../base/modal-body';
 import { ModalHeader } from '../base/modal-header';
 import { PromptButton } from '../base/prompt-button';
 import { HelpTooltip } from '../help-tooltip';
+import { DEFAULT_ORGANIZATION_ID } from "../../../models/organization"
 
 export interface ProjectSettingsModalProps extends ModalProps {
   project: Project;
@@ -16,7 +17,6 @@ export interface ProjectSettingsModalProps extends ModalProps {
 
 export const ProjectSettingsModal: FC<ProjectSettingsModalProps> = ({ project, onHide }) => {
   const modalRef = useRef<ModalHandle>(null);
-  const { organizationId } = useParams<{organizationId: string}>();
   const { submit } = useFetcher();
 
   useEffect(() => {
@@ -59,7 +59,7 @@ export const ProjectSettingsModal: FC<ProjectSettingsModalProps> = ({ project, o
                         name: e.currentTarget.value,
                       },
                       {
-                        action: `/organization/${organizationId}/project/${project._id}/rename`,
+                        action: `/organization/${DEFAULT_ORGANIZATION_ID}/project/${project._id}/rename`,
                         method: 'post',
                       }
                     );
@@ -74,7 +74,7 @@ export const ProjectSettingsModal: FC<ProjectSettingsModalProps> = ({ project, o
               onClick={() =>
                 submit(
                   {},
-                  { method: 'post', action: `/organization/${organizationId}/project/${project._id}/delete` }
+                  { method: 'post', action: `/organization/${DEFAULT_ORGANIZATION_ID}/project/${project._id}/delete` }
                 )
               }
               className="width-auto btn btn--clicky inline-block"

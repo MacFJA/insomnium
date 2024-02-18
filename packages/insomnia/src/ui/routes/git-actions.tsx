@@ -350,7 +350,7 @@ export const cloneGitRepoAction: ActionFunction = async ({
   request,
   params,
 }): Promise<CloneGitActionResult> => {
-  const { organizationId, projectId } = params;
+  const { projectId } = params;
 
   guard(typeof projectId === 'string', 'ProjectId is required.');
   const project = await models.project.getById(projectId);
@@ -495,7 +495,7 @@ export const cloneGitRepoAction: ActionFunction = async ({
     const existingWorkspace = await models.workspace.getById(workspace._id);
 
     if (existingWorkspace) {
-      return redirect(`/organization/${existingWorkspace.parentId || DEFAULT_ORGANIZATION_ID}/project/${existingWorkspace.parentId || DEFAULT_PROJECT_ID}/workspace/${existingWorkspace._id}/debug`);
+      return redirect(`/organization/${DEFAULT_ORGANIZATION_ID}/project/${existingWorkspace.parentId || DEFAULT_PROJECT_ID}/workspace/${existingWorkspace._id}/debug`);
     }
 
     // Loop over all model folders in root
@@ -530,11 +530,11 @@ export const cloneGitRepoAction: ActionFunction = async ({
   // Redirect to debug for collection scope initial clone
   if (scope === WorkspaceScopeKeys.collection) {
     return redirect(
-      `/organization/${organizationId}/project/${projectId}/workspace/${workspaceId}/debug`
+      `/organization/${DEFAULT_ORGANIZATION_ID}/project/${projectId}/workspace/${workspaceId}/debug`
     );
   }
   return redirect(
-    `/organization/${organizationId}/project/${projectId}/workspace/${workspaceId}/${ACTIVITY_SPEC}`
+    `/organization/${DEFAULT_ORGANIZATION_ID}/project/${projectId}/workspace/${workspaceId}/${ACTIVITY_SPEC}`
   );
 };
 

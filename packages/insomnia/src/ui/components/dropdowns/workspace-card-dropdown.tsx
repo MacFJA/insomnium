@@ -24,6 +24,7 @@ import { ImportModal } from '../modals/import-modal';
 import { WorkspaceDuplicateModal } from '../modals/workspace-duplicate-modal';
 import { WorkspaceSettingsModal } from '../modals/workspace-settings-modal';
 import { SvgIcon } from '../svg-icon';
+import { DEFAULT_ORGANIZATION_ID } from "../../../models/organization"
 
 interface Props {
   workspace: Workspace;
@@ -91,9 +92,8 @@ export const WorkspaceCardDropdown: FC<Props> = props => {
   const [isExportModalOpen, setIsExportModalOpen] = useState(false);
   const [isSettingsModalOpen, setIsSettingsModalOpen] = useState(false);
   const {
-    organizationId,
     projectId,
-  } = useParams() as { organizationId: string; projectId: string };
+  } = useParams() as { projectId: string };
 
   const workspaceName = workspace.name;
   const projectName = project.name ?? getProductName();
@@ -131,7 +131,7 @@ export const WorkspaceCardDropdown: FC<Props> = props => {
                   fetcher.submit(
                     { name, workspaceId: workspace._id },
                     {
-                      action: `/organization/${organizationId}/project/${workspace.parentId}/workspace/update`,
+                      action: `/organization/${DEFAULT_ORGANIZATION_ID}/project/${workspace.parentId}/workspace/update`,
                       method: 'post',
                       encType: 'application/json',
                     }
@@ -186,7 +186,7 @@ export const WorkspaceCardDropdown: FC<Props> = props => {
                     fetcher.submit(
                       { workspaceId: workspace._id },
                       {
-                        action: `/organization/${organizationId}/project/${workspace.parentId}/workspace/delete`,
+                        action: `/organization/${DEFAULT_ORGANIZATION_ID}/project/${workspace.parentId}/workspace/delete`,
                         method: 'post',
                       }
                     );
@@ -210,7 +210,6 @@ export const WorkspaceCardDropdown: FC<Props> = props => {
           from={{ type: 'file' }}
           projectName={projectName}
           workspaceName={workspaceName}
-          organizationId={organizationId}
           defaultProjectId={projectId}
           defaultWorkspaceId={workspace._id}
         />

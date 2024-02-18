@@ -1,5 +1,3 @@
-
-export const type = 'Organization';
 export const prefix = 'org';
 
 export interface Organization {
@@ -13,5 +11,3 @@ export const defaultOrganization: Organization = {
   _id: DEFAULT_ORGANIZATION_ID,
   name: 'Personal Projects',
 };
-
-export const isDefaultOrganization = (organization: Organization) => organization._id === DEFAULT_ORGANIZATION_ID;

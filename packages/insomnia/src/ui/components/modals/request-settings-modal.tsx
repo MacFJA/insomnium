@@ -15,6 +15,7 @@ import { ModalHeader } from '../base/modal-header';
 import { CodeEditorHandle } from '../codemirror/code-editor';
 import { HelpTooltip } from '../help-tooltip';
 import { MarkdownEditor } from '../markdown-editor';
+import { DEFAULT_ORGANIZATION_ID } from "../../../models/organization"
 
 export interface RequestSettingsModalOptions {
   request: Request | GrpcRequest | WebSocketRequest;
@@ -27,14 +28,14 @@ interface State {
 export const RequestSettingsModal = ({ request, onHide }: ModalProps & RequestSettingsModalOptions) => {
   const modalRef = useRef<ModalHandle>(null);
   const editorRef = useRef<CodeEditorHandle>(null);
-  const { organizationId, projectId, workspaceId } = useParams() as { organizationId: string; projectId: string; workspaceId: string };
+  const { projectId, workspaceId } = useParams() as { projectId: string; workspaceId: string };
   const workspacesFetcher = useFetcher();
   useEffect(() => {
     const isIdleAndUninitialized = workspacesFetcher.state === 'idle' && !workspacesFetcher.data;
     if (isIdleAndUninitialized) {
-      workspacesFetcher.load(`/organization/${organizationId}/project/${projectId}`);
+      workspacesFetcher.load(`/organization/${DEFAULT_ORGANIZATION_ID}/project/${projectId}`);
     }
-  }, [organizationId, projectId, workspacesFetcher]);
+  }, [projectId, workspacesFetcher]);
   const projectLoaderData = workspacesFetcher?.data as ProjectLoaderData;
   const workspacesForActiveProject = projectLoaderData?.workspaces.map(w => w.workspace) || [];
   const [state, setState] = useState<State>({
@@ -51,7 +52,7 @@ export const RequestSettingsModal = ({ request, onHide }: ModalProps & RequestSe
   const duplicateRequest = (r: Partial<Request>) => {
     requestFetcher.submit(JSON.stringify(r),
       {
-        action: `/organization/${organizationId}/project/${projectId}/workspace/${workspaceId}/debug/request/${request._id}/duplicate`,
+        action: `/organization/${DEFAULT_ORGANIZATION_ID}/project/${projectId}/workspace/${workspaceId}/debug/request/${request._id}/duplicate`,
         method: 'post',
         encType: 'application/json',
       });
@@ -60,7 +61,7 @@ export const RequestSettingsModal = ({ request, onHide }: ModalProps & RequestSe
     guard(state.activeWorkspaceIdToCopyTo, 'Workspace ID is required');
     patchRequest(request._id, { parentId: state.activeWorkspaceIdToCopyTo });
     modalRef.current?.hide();
-    navigate(`/organization/${organizationId}/project/${projectId}/workspace/${state.activeWorkspaceIdToCopyTo}/debug`);
+    navigate(`/organization/${DEFAULT_ORGANIZATION_ID}/project/${projectId}/workspace/${state.activeWorkspaceIdToCopyTo}/debug`);
   }
 
   async function handleCopyToWorkspace() {

@@ -14,6 +14,7 @@ import { ModalHeader } from '../base/modal-header';
 import { PromptButton } from '../base/prompt-button';
 import { Tooltip } from '../tooltip';
 import { showAlert } from '.';
+import { DEFAULT_ORGANIZATION_ID } from "../../../models/organization"
 
 interface Item {
   path: string;
@@ -27,8 +28,7 @@ interface Item {
 export const GitStagingModal: FC<ModalProps> = ({
   onHide,
 }) => {
-  const { organizationId, projectId, workspaceId } = useParams() as {
-    organizationId: string;
+  const { projectId, workspaceId } = useParams() as {
     projectId: string;
     workspaceId: string;
   };
@@ -48,9 +48,9 @@ export const GitStagingModal: FC<ModalProps> = ({
 
   useEffect(() => {
     if (gitChangesFetcher.state === 'idle' && !gitChangesFetcher.data) {
-      gitChangesFetcher.load(`/organization/${organizationId}/project/${projectId}/workspace/${workspaceId}/git/changes`);
+      gitChangesFetcher.load(`/organization/${DEFAULT_ORGANIZATION_ID}/project/${projectId}/workspace/${workspaceId}/git/changes`);
     }
-  }, [organizationId, projectId, workspaceId, gitChangesFetcher]);
+  }, [projectId, workspaceId, gitChangesFetcher]);
 
   const {
     changes,
@@ -96,7 +96,7 @@ export const GitStagingModal: FC<ModalProps> = ({
                 const data = new FormData(formRef.current);
                 data.append('changeType', 'modified');
                 const res = await gitCommitFetcher.submit(data, {
-                  action: `/organization/${organizationId}/project/${projectId}/workspace/${workspaceId}/git/commit`,
+                  action: `/organization/${DEFAULT_ORGANIZATION_ID}/project/${projectId}/workspace/${workspaceId}/git/commit`,
                   method: 'post',
                 });
                 setHasDone(true)
@@ -126,7 +126,7 @@ export const GitStagingModal: FC<ModalProps> = ({
                           data.append('changeType', 'modified');
 
                           rollbackFetcher.submit(data, {
-                            action: `/organization/${organizationId}/project/${projectId}/workspace/${workspaceId}/git/rollback`,
+                            action: `/organization/${DEFAULT_ORGANIZATION_ID}/project/${projectId}/workspace/${workspaceId}/git/rollback`,
                             method: 'post',
                           });
                         }
@@ -195,7 +195,7 @@ export const GitStagingModal: FC<ModalProps> = ({
                                         data.append('paths', item.path);
 
                                         rollbackFetcher.submit(data, {
-                                          action: `/organization/${organizationId}/project/${projectId}/workspace/${workspaceId}/git/rollback`,
+                                          action: `/organization/${DEFAULT_ORGANIZATION_ID}/project/${projectId}/workspace/${workspaceId}/git/rollback`,
                                           method: 'post',
                                         });
                                       }
@@ -231,7 +231,7 @@ export const GitStagingModal: FC<ModalProps> = ({
                           data.append('changeType', 'unversioned');
 
                           rollbackFetcher.submit(data, {
-                            action: `/organization/${organizationId}/project/${projectId}/workspace/${workspaceId}/git/rollback`,
+                            action: `/organization/${DEFAULT_ORGANIZATION_ID}/project/${projectId}/workspace/${workspaceId}/git/rollback`,
                             method: 'post',
                           });
                         }
@@ -305,7 +305,7 @@ export const GitStagingModal: FC<ModalProps> = ({
                                         data.append('paths', item.path);
 
                                         rollbackFetcher.submit(data, {
-                                          action: `/organization/${organizationId}/project/${projectId}/workspace/${workspaceId}/git/rollback`,
+                                          action: `/organization/${DEFAULT_ORGANIZATION_ID}/project/${projectId}/workspace/${workspaceId}/git/rollback`,
                                           method: 'post',
                                         });
                                       }

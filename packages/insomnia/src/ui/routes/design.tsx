@@ -35,6 +35,7 @@ import {
   useGitVCSVersion,
 } from '../hooks/use-vcs-version';
 import { WorkspaceSyncDropdown } from '../components/dropdowns/workspace-sync-dropdown';
+import { DEFAULT_ORGANIZATION_ID } from "../../models/organization"
 const EmptySpaceHelper = styled.div({
   display: 'flex',
   alignItems: 'flex-start',
@@ -156,8 +157,7 @@ interface LintMessage extends Notice {
 }
 
 const Design: FC = () => {
-  const { organizationId, projectId, workspaceId } = useParams() as {
-    organizationId: string;
+  const { projectId, workspaceId } = useParams() as {
     projectId: string;
     workspaceId: string;
   };
@@ -191,14 +191,14 @@ const Design: FC = () => {
           contents: contents,
         },
         {
-          action: `/organization/${organizationId}/project/${projectId}/workspace/${workspaceId}/${ACTIVITY_SPEC}/update`,
+          action: `/organization/${DEFAULT_ORGANIZATION_ID}/project/${projectId}/workspace/${workspaceId}/${ACTIVITY_SPEC}/update`,
           method: 'post',
         }
       );
     };
 
     return debounce(handler, 500);
-  }, [organizationId, projectId, updateApiSpecFetcher, workspaceId]);
+  }, [projectId, updateApiSpecFetcher, workspaceId]);
 
   const handleScrollToSelection = useCallback(
     (chStart: number, chEnd: number, lineStart: number, lineEnd: number) => {
@@ -302,7 +302,7 @@ const Design: FC = () => {
                         fromSync: 'true',
                       },
                       {
-                        action: `/organization/${organizationId}/project/${projectId}/workspace/${workspaceId}/${ACTIVITY_SPEC}/update`,
+                        action: `/organization/${DEFAULT_ORGANIZATION_ID}/project/${projectId}/workspace/${workspaceId}/${ACTIVITY_SPEC}/update`,
                         method: 'post',
                       }
                     );
@@ -364,7 +364,7 @@ const Design: FC = () => {
                     generateRequestCollectionFetcher.submit(
                       {},
                       {
-                        action: `/organization/${organizationId}/project/${projectId}/workspace/${workspaceId}/${ACTIVITY_SPEC}/generate-request-collection`,
+                        action: `/organization/${DEFAULT_ORGANIZATION_ID}/project/${projectId}/workspace/${workspaceId}/${ACTIVITY_SPEC}/generate-request-collection`,
                         method: 'post',
                       }
                     );
